@@ -1,5 +1,6 @@
 package com.example.font_segundo_parcial.ui.fichas_clinicas;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
