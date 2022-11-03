@@ -65,8 +65,8 @@
                 android:layout_marginTop="10dp"
                 android:text="Resultados:"
                 android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/button"
-                app:layout_constraintTop_toBottomOf="@+id/button" />
+                app:layout_constraintStart_toStartOf="@+id/botonBuscarFichas"
+                app:layout_constraintTop_toBottomOf="@+id/botonBuscarFichas" />
 
             <TextView
                 android:id="@+id/text_fichas_cinicas2"
@@ -133,6 +133,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas7">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputPacienteFiltroFichaClinica"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Buscar..." />
@@ -140,7 +141,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/botonBuscarFichas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="80dp"
@@ -156,7 +157,7 @@
                 android:layout_marginTop="80dp"
                 android:onClick="ejecutar_nueva_ficha"
                 android:text="Agregar Ficha"
-                app:layout_constraintStart_toEndOf="@+id/button"
+                app:layout_constraintStart_toEndOf="@+id/botonBuscarFichas"
                 app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas7" />
 
             <androidx.recyclerview.widget.RecyclerView

@@ -1,5 +1,7 @@
 package com.example.font_segundo_parcial.ui.fichas_clinicas;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,12 +13,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.font_segundo_parcial.R;
 import com.example.font_segundo_parcial.api.AdapterFichaClinica;
 import com.example.font_segundo_parcial.api.Datos;
 import com.example.font_segundo_parcial.api.FichaClinica;
 import com.example.font_segundo_parcial.api.RetrofitUtil;
+import com.google.android.material.textfield.TextInputEditText;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -84,6 +94,9 @@ public class FichasClinicasFragment extends Fragment {
         // cargar los datos
         cargarFichasClinicas();
 
+        // establecer onClickListener para el botón de filtrar fichas
+        filtrarFichasOnClickListener(vista);
+
         // Inflate the layout for this fragment
         return vista;
     }
@@ -93,7 +106,15 @@ public class FichasClinicasFragment extends Fragment {
      */
     public void cargarFichasClinicas() {
         Call<Datos<FichaClinica>> callApi = RetrofitUtil.getFichaClinicaService()
-                .obtenerFichasClinicas();
+                .obtenerFichasClinicas(null);
+        ejecutarGet(callApi);
+    }
+
+
+    /**
+     * Ejecutar get en el back
+     */
+    public void ejecutarGet(Call<Datos<FichaClinica>> callApi){
         callApi.enqueue(new Callback<Datos<FichaClinica>>() {
             @Override
             public void onResponse(Call<Datos<FichaClinica>> call, Response<Datos<FichaClinica>> response) {
@@ -117,5 +138,55 @@ public class FichasClinicasFragment extends Fragment {
                 Log.e("s", t.toString());
             }
         });
+    }
+
+
+    /**
+     * Para establecer en OnClickListener para filtrar las fichas clínicas
+     * @param vista La vista actual
+     */
+    private void filtrarFichasOnClickListener(View vista){
+        Button botonBuscar = vista.findViewById(R.id.botonBuscarFichas);
+        botonBuscar.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                filtrarFichas();
+
+                // ocultar teclado
+                InputMethodManager miteclado=(InputMethodManager) getActivity()
+                        .getSystemService(Context.INPUT_METHOD_SERVICE);
+                miteclado.hideSoftInputFromWindow(botonBuscar.getWindowToken(),0);
+            }
+        });
+    }
+
+
+    /**
+     * Filtrar las fichas por los campos de búsqueda
+     */
+    private void filtrarFichas(){
+
+        // obtener los valores de los campos de búsqueda
+        String textoInputPaciente = ((TextInputEditText)getActivity()
+                .findViewById(R.id.inputPacienteFiltroFichaClinica)).getText().toString();
+
+        // generar el filtro para enviar al back
+        JSONObject filtro = new JSONObject();
+        try {
+
+            if (!textoInputPaciente.equals("")){
+                filtro.accumulate("idCliente",
+                        new JSONObject("{idPersona:"+ textoInputPaciente + "}"));
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Toast.makeText(getActivity(),"Filtrando...",Toast.LENGTH_SHORT).show();
+
+        // ejecutar la búsqueda
+        Call<Datos<FichaClinica>> callApi = RetrofitUtil.getFichaClinicaService()
+                    .obtenerFichasClinicas(filtro);
+        ejecutarGet(callApi);
     }
 }

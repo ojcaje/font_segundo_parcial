@@ -27,15 +27,21 @@ public class AdapterFichaClinica extends RecyclerView.Adapter<AdapterFichaClinic
         return pvh;
     }
 
+
+    /**
+     * Para rellenar los items del RecyclerView que muestra la lista de fichas clínicas
+     */
     @Override
     public void onBindViewHolder(@NonNull AdapterFichaClinica.ViewHolder viewHolder, int position) {
 
         // TODO: dejar de usar JSONObject cuando ya estén las clases correspondientes a cada elemento
         try {
             viewHolder.tvCliente.setText(
-                    (new JSONObject((dsFichas[position].getIdCliente()
-                    .toString().replaceAll(" +",""))))
-                    .get("nombre").toString()
+                    new StringBuilder().append((new JSONObject((dsFichas[position].getIdCliente()
+                            .toString().replaceAll(" +", ""))))
+                            .get("nombre").toString()).append((new JSONObject((dsFichas[position].getIdCliente()
+                            .toString().replaceAll(" +", ""))))
+                            .get("idPersona").toString()).toString()
             );
             viewHolder.tvSubcategoria.setText(
                     (new JSONObject((dsFichas[position].getIdTipoProducto()
