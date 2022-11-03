@@ -5,82 +5,158 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/text_fichas_cinicas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="37dp"
-        android:layout_marginBottom="35dp"
-        android:text="Fichas Clínicas - Listado"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/text_fichas_cinicas3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="120dp">
 
-    <TextView
-        android:id="@+id/text_fichas_cinicas3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="34dp"
-        android:text="Filtros de búsqueda"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/text_fichas_cinicas2"
-        app:layout_constraintStart_toStartOf="@+id/text_fichas_cinicas2"
-        app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/text_fichas_cinicas2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:text="Fecha desde:"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextDate"
-        app:layout_constraintStart_toStartOf="@+id/editTextDate"
-        app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas3" />
+            <TextView
+                android:id="@+id/text_fichas_cinicas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Fichas Clínicas - Listado"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextDate"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="53dp"
-        android:layout_marginEnd="53dp"
-        android:layout_marginBottom="20dp"
-        android:ems="10"
-        android:hint="Fecha"
-        android:inputType="date"
-        app:layout_constraintBottom_toTopOf="@+id/text_fichas_cinicas4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas2" />
+            <TextView
+                android:id="@+id/text_fichas_cinicas5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Fisioterapeuta:"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/editTextDate5"
+                app:layout_constraintTop_toBottomOf="@+id/editTextDate5" />
 
-    <EditText
-        android:id="@+id/editTextDate5"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="53dp"
-        android:layout_marginEnd="53dp"
-        android:layout_marginBottom="395dp"
-        android:ems="10"
-        android:hint="Fecha"
-        android:inputType="date"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas4" />
+            <TextView
+                android:id="@+id/text_fichas_cinicas7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="75dp"
+                android:text="Paciente:"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/text_fichas_cinicas5"
+                app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas5" />
 
-    <TextView
-        android:id="@+id/text_fichas_cinicas4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="9dp"
-        android:text="Fecha hasta:"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextDate5"
-        app:layout_constraintStart_toStartOf="@+id/editTextDate"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
+            <TextView
+                android:id="@+id/text_fichas_cinicas3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="20dp"
+                android:text="Filtros de búsqueda"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas" />
+
+            <TextView
+                android:id="@+id/text_fichas_cinicas6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Resultados:"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/button"
+                app:layout_constraintTop_toBottomOf="@+id/button" />
+
+            <TextView
+                android:id="@+id/text_fichas_cinicas2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Fecha desde:"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/text_fichas_cinicas3"
+                app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas3" />
+
+            <TextView
+                android:id="@+id/text_fichas_cinicas4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Fecha hasta:"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/editTextDate"
+                app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
+
+            <EditText
+                android:id="@+id/editTextDate5"
+                android:layout_width="300dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="Fecha"
+                android:inputType="date"
+                app:layout_constraintStart_toStartOf="@+id/text_fichas_cinicas4"
+                app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas4" />
+
+            <EditText
+                android:id="@+id/editTextDate"
+                android:layout_width="300dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="Fecha"
+                android:inputType="date"
+                app:layout_constraintStart_toStartOf="@+id/text_fichas_cinicas2"
+                app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas2" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout1"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="@+id/text_fichas_cinicas5"
+                app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas5">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Buscar..." />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout2"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="@+id/text_fichas_cinicas7"
+                app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas7">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Buscar..." />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:text="Buscar"
+                app:layout_constraintStart_toStartOf="@+id/text_fichas_cinicas7"
+                app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas7" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listaFichasClinicas"
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="@+id/text_fichas_cinicas6"
+                app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas6" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
