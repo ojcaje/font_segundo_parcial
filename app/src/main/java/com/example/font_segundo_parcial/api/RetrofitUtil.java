@@ -1,5 +1,8 @@
 package com.example.font_segundo_parcial.api;
 
+import com.example.font_segundo_parcial.api.services.CategoriaService;
+import com.example.font_segundo_parcial.api.services.SubcategoriaService;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -33,5 +36,13 @@ public class RetrofitUtil {
 
     public static FichaClinicaService getFichaClinicaService(){
         return RetrofitUtil.getClient(URL_BASE).create(FichaClinicaService.class);
+    }
+
+    public static CategoriaService getCategoriaService(){
+        return RetrofitUtil.getClient(URL_BASE).create(CategoriaService.class);
+    }
+
+    public static SubcategoriaService getSubcategoriaService(){
+        return RetrofitUtil.getClient(URL_BASE).create(SubcategoriaService.class);
     }
 }

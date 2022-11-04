@@ -34,8 +34,8 @@
                 android:layout_marginTop="10dp"
                 android:text="Fisioterapeuta:"
                 android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/editTextDate5"
-                app:layout_constraintTop_toBottomOf="@+id/editTextDate5" />
+                app:layout_constraintStart_toStartOf="@+id/text_fichas_cinicas2"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout8" />
 
             <TextView
                 android:id="@+id/text_fichas_cinicas7"
@@ -46,6 +46,26 @@
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="@+id/text_fichas_cinicas5"
                 app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas5" />
+
+            <TextView
+                android:id="@+id/text_fichas_cinicas9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Categoría:"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+
+            <TextView
+                android:id="@+id/text_fichas_cinicas10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Subcategoría:"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/spinnerCategoriaFiltroFicha"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerCategoriaFiltroFicha" />
 
             <TextView
                 android:id="@+id/text_fichas_cinicas3"
@@ -85,30 +105,8 @@
                 android:layout_marginTop="10dp"
                 android:text="Fecha hasta:"
                 android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/editTextDate"
-                app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
-
-            <EditText
-                android:id="@+id/editTextDate5"
-                android:layout_width="300dp"
-                android:layout_height="52dp"
-                android:layout_marginTop="10dp"
-                android:ems="10"
-                android:hint="Fecha"
-                android:inputType="date"
-                app:layout_constraintStart_toStartOf="@+id/text_fichas_cinicas4"
-                app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas4" />
-
-            <EditText
-                android:id="@+id/editTextDate"
-                android:layout_width="300dp"
-                android:layout_height="52dp"
-                android:layout_marginTop="10dp"
-                android:ems="10"
-                android:hint="Fecha"
-                android:inputType="date"
-                app:layout_constraintStart_toStartOf="@+id/text_fichas_cinicas2"
-                app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas2" />
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout9"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout9" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout1"
@@ -119,6 +117,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas5">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputFisioterapeutaFiltroFicha"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Buscar..." />
@@ -144,21 +143,20 @@
                 android:id="@+id/botonBuscarFichas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="10dp"
                 android:text="Buscar"
-                app:layout_constraintStart_toStartOf="@+id/text_fichas_cinicas7"
-                app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas7" />
+                app:layout_constraintStart_toStartOf="@+id/text_fichas_cinicas9"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerSubcategoriaFiltroFicha" />
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="80dp"
                 android:onClick="ejecutar_nueva_ficha"
                 android:text="Agregar Ficha"
                 app:layout_constraintStart_toEndOf="@+id/botonBuscarFichas"
-                app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas7" />
+                app:layout_constraintTop_toTopOf="@+id/botonBuscarFichas" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listaFichasClinicas"
@@ -167,6 +165,63 @@
                 android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="@+id/text_fichas_cinicas6"
                 app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas6" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout8"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout1"
+                app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas4">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputFechaHastaFiltroFicha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="AAAA/MM/DD" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout9"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout8"
+                app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas2">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputFechaDesdeFiltroFichas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="AAAA/MM/DD" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/spinnerCategoriaFiltroFicha"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
+                app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas9" />
+
+            <Spinner
+                android:id="@+id/spinnerSubcategoriaFiltroFicha"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="@+id/spinnerCategoriaFiltroFicha"
+                app:layout_constraintStart_toStartOf="@+id/text_fichas_cinicas10"
+                app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas10" />
+
+            <TextView
+                android:id="@+id/txtspinnerCategoriaFiltroFicha"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/spinnerCategoriaFiltroFicha"
+                app:layout_constraintEnd_toEndOf="@+id/spinnerCategoriaFiltroFicha"
+                app:layout_constraintStart_toStartOf="@+id/spinnerCategoriaFiltroFicha"
+                app:layout_constraintTop_toTopOf="@+id/spinnerCategoriaFiltroFicha" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
