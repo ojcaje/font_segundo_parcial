@@ -148,16 +148,6 @@
                 app:layout_constraintStart_toStartOf="@+id/text_fichas_cinicas9"
                 app:layout_constraintTop_toBottomOf="@+id/spinnerSubcategoriaFiltroFicha" />
 
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:onClick="ejecutar_nueva_ficha"
-                android:text="Agregar Ficha"
-                app:layout_constraintStart_toEndOf="@+id/botonBuscarFichas"
-                app:layout_constraintTop_toTopOf="@+id/botonBuscarFichas" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listaFichasClinicas"
                 android:layout_width="300dp"

@@ -6,13 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".ui.fichas_clinicas.NuevaFichaClinicaActivity">
 
-    <fragment
-        android:id="@+id/fragmentNuevaFicha"
-        android:name="com.example.font_segundo_parcial.ui.fichas_clinicas.NuevaFichaClinicaFragment"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_nueva_ficha_clinica"></fragment>
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="99dp"
+        tools:layout_editor_absoluteY="70dp"
+        android:fillViewport="true">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="50dp">
+
+            <fragment
+                android:id="@+id/editarFichaClinicaFragment"
+                android:name="com.example.font_segundo_parcial.ui.fichas_clinicas.EditarFichaClinicaFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout="@layout/fragment_editar_ficha_clinica" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

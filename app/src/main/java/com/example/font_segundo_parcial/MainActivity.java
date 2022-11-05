@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        getSupportActionBar().setTitle("Front segundo parcial");
     }
 
     @Override
@@ -63,14 +64,5 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
-    }
-
-    /**
-     * para lanzar la actividad para crear una nueva ficha
-     */
-    public void ejecutar_nueva_ficha(View vew){
-        Intent i=new Intent(this, NuevaFichaClinicaActivity.class);
-
-        startActivity(i);
     }
 }

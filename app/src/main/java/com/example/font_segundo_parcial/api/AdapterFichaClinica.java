@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.font_segundo_parcial.R;
+import com.example.font_segundo_parcial.api.models.FichaClinica;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,11 +44,7 @@ public class AdapterFichaClinica extends RecyclerView.Adapter<AdapterFichaClinic
                             .toString().replaceAll(" +", ""))))
                             .get("idPersona").toString()).toString()
             );
-            viewHolder.tvSubcategoria.setText(
-                    (new JSONObject((dsFichas[position].getIdTipoProducto()
-                            .toString().replaceAll(" +",""))))
-                            .get("descripcion").toString()
-            );
+            viewHolder.tvSubcategoria.setText(dsFichas[position].getIdTipoProducto().getDescripcion());
             viewHolder.tvProfesional.setText(
                     (new JSONObject((dsFichas[position].getIdEmpleado()
                             .toString().replaceAll(" +",""))))

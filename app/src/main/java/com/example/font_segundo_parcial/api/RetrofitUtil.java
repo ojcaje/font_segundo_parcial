@@ -1,6 +1,7 @@
 package com.example.font_segundo_parcial.api;
 
 import com.example.font_segundo_parcial.api.services.CategoriaService;
+import com.example.font_segundo_parcial.api.services.FichaClinicaService;
 import com.example.font_segundo_parcial.api.services.SubcategoriaService;
 
 import okhttp3.OkHttpClient;

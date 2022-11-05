@@ -1,5 +1,6 @@
-package com.example.font_segundo_parcial.api;
+package com.example.font_segundo_parcial.api.models;
 
+import com.example.font_segundo_parcial.api.models.Subcategoria;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -25,7 +26,7 @@ public class FichaClinica {
     // TODO: cambiar la clase Object por Subcategoria
     @SerializedName("idTipoProducto")
     @Expose
-    private Object idTipoProducto;
+    private Subcategoria idTipoProducto;
 
     @SerializedName("fechaHoraCadenaFormateada")
     @Expose
@@ -77,11 +78,11 @@ public class FichaClinica {
         this.idCliente = idCliente;
     }
 
-    public Object getIdTipoProducto() {
+    public Subcategoria getIdTipoProducto() {
         return idTipoProducto;
     }
 
-    public void setIdTipoProducto(Object idTipoProducto) {
+    public void setIdTipoProducto(Subcategoria idTipoProducto) {
         this.idTipoProducto = idTipoProducto;
     }
 
