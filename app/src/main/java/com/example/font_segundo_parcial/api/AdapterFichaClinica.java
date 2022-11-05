@@ -1,8 +1,10 @@
 package com.example.font_segundo_parcial.api;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.font_segundo_parcial.R;
 import com.example.font_segundo_parcial.api.models.FichaClinica;
+import com.example.font_segundo_parcial.ui.fichas_clinicas.EditarFichaClinicaActivity;
+import com.example.font_segundo_parcial.ui.fichas_clinicas.NuevaFichaClinicaActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,6 +39,7 @@ public class AdapterFichaClinica extends RecyclerView.Adapter<AdapterFichaClinic
     @Override
     public void onBindViewHolder(@NonNull AdapterFichaClinica.ViewHolder viewHolder, int position) {
 
+        // setear los datos de la ficha clínica actual
         // TODO: dejar de usar JSONObject cuando ya estén las clases correspondientes a cada elemento
         try {
             viewHolder.tvCliente.setText(
@@ -44,7 +49,6 @@ public class AdapterFichaClinica extends RecyclerView.Adapter<AdapterFichaClinic
                             .toString().replaceAll(" +", ""))))
                             .get("idPersona").toString()).toString()
             );
-            viewHolder.tvSubcategoria.setText(dsFichas[position].getIdTipoProducto().getDescripcion());
             viewHolder.tvProfesional.setText(
                     (new JSONObject((dsFichas[position].getIdEmpleado()
                             .toString().replaceAll(" +",""))))
@@ -53,7 +57,17 @@ public class AdapterFichaClinica extends RecyclerView.Adapter<AdapterFichaClinic
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        viewHolder.tvSubcategoria.setText(dsFichas[position].getIdTipoProducto().getDescripcion());
         viewHolder.tvFecha.setText(dsFichas[position].getFechaHoraCadenaFormateada());
+
+        // para lanzar la actividad de editar la ficha clínica actual
+        viewHolder.btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(view.getContext(), EditarFichaClinicaActivity.class);
+                view.getContext().startActivity(i);
+            }
+        });
     }
 
     @Override
@@ -66,6 +80,7 @@ public class AdapterFichaClinica extends RecyclerView.Adapter<AdapterFichaClinic
         public TextView tvProfesional;
         public TextView tvCliente;
         public TextView tvSubcategoria;
+        public Button btnEditar;
 
         public ViewHolder(View v) {
             super(v);
@@ -73,6 +88,7 @@ public class AdapterFichaClinica extends RecyclerView.Adapter<AdapterFichaClinic
             tvProfesional=v.findViewById(R.id.txtProfesional);
             tvCliente=v.findViewById(R.id.txtCliente);
             tvSubcategoria=v.findViewById(R.id.txtSubcategoria);
+            btnEditar=v.findViewById(R.id.btnEditar);
         }
     }
 

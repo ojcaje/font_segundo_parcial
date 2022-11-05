@@ -16,6 +16,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.fichas_clinicas.EditarFichaClinicaActivity"
+            android:exported="false"
+            android:label="@string/title_activity_editar_ficha_clinica"
+            android:theme="@style/Theme.Font_segundo_parcial.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.fichas_clinicas.NuevaFichaClinicaActivity"
             android:exported="false">
             <meta-data
