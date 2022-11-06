@@ -1,10 +1,13 @@
 package com.example.font_segundo_parcial.api.models;
 
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+
 import com.example.font_segundo_parcial.api.models.Subcategoria;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class FichaClinica {
+public class FichaClinica extends BaseObservable {
     @SerializedName("motivoConsulta")
     @Expose
     private String motivoConsulta;
@@ -38,6 +41,7 @@ public class FichaClinica {
     @Expose
     private String fechaHora;
 
+    @Bindable
     public String getMotivoConsulta() {
         return motivoConsulta;
     }
@@ -46,6 +50,7 @@ public class FichaClinica {
         this.motivoConsulta = motivoConsulta;
     }
 
+    @Bindable
     public String getDiagnostico() {
         return diagnostico;
     }
@@ -54,6 +59,7 @@ public class FichaClinica {
         this.diagnostico = diagnostico;
     }
 
+    @Bindable
     public String getObservacion() {
         return observacion;
     }
@@ -62,6 +68,7 @@ public class FichaClinica {
         this.observacion = observacion;
     }
 
+    @Bindable
     public Object getIdEmpleado() {
         return idEmpleado;
     }
@@ -70,6 +77,7 @@ public class FichaClinica {
         this.idEmpleado = idEmpleado;
     }
 
+    @Bindable
     public Object getIdCliente() {
         return idCliente;
     }
@@ -78,6 +86,7 @@ public class FichaClinica {
         this.idCliente = idCliente;
     }
 
+    @Bindable
     public Subcategoria getIdTipoProducto() {
         return idTipoProducto;
     }
@@ -86,6 +95,7 @@ public class FichaClinica {
         this.idTipoProducto = idTipoProducto;
     }
 
+    @Bindable
     public String getFechaHoraCadenaFormateada() {
         return fechaHoraCadenaFormateada;
     }
@@ -94,6 +104,7 @@ public class FichaClinica {
         this.fechaHoraCadenaFormateada = fechaHoraCadenaFormateada;
     }
 
+    @Bindable
     public Integer getIdFichaClinica() {
         return idFichaClinica;
     }
@@ -102,6 +113,7 @@ public class FichaClinica {
         this.idFichaClinica = idFichaClinica;
     }
 
+    @Bindable
     public String getFechaHora() {
         return fechaHora;
     }

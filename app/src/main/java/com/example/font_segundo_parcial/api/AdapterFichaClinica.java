@@ -61,10 +61,12 @@ public class AdapterFichaClinica extends RecyclerView.Adapter<AdapterFichaClinic
         viewHolder.tvFecha.setText(dsFichas[position].getFechaHoraCadenaFormateada());
 
         // para lanzar la actividad de editar la ficha clínica actual
+        Integer idFicha = dsFichas[position].getIdFichaClinica();
         viewHolder.btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i=new Intent(view.getContext(), EditarFichaClinicaActivity.class);
+                i.putExtra("idFicha", idFicha);
                 view.getContext().startActivity(i);
             }
         });

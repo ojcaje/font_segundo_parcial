@@ -1,192 +1,208 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fichas_clinicas.EditarFichaClinicaFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <data>
+        <variable
+            name="ficha"
+            type="com.example.font_segundo_parcial.api.models.FichaClinica" />
+    </data>
 
-    <TextView
-        android:id="@+id/textoTitulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Nueva Ficha Clínica"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fichas_clinicas.EditarFichaClinicaFragment">
 
-        <TextView
-            android:id="@+id/text_fichas_cinicas14"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Empleado:"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textoTitulo" />
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/text_fichas_cinicas16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Paciente:"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+            <TextView
+                android:id="@+id/textoTitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Nueva Ficha Clínica"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/text_fichas_cinicas17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Categoría:"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout3"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
+            <TextView
+                android:id="@+id/text_fichas_cinicas14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Empleado:"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textoTitulo" />
 
-    <TextView
-        android:id="@+id/text_fichas_cinicas18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Subcategoría:"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/spinnerCategoriaNuevaFicha"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerCategoriaNuevaFicha" />
+            <TextView
+                android:id="@+id/text_fichas_cinicas16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Paciente:"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        android:layout_width="293dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="@+id/text_fichas_cinicas14"
-        app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas14">
+            <TextView
+                android:id="@+id/text_fichas_cinicas17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Categoría:"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout3"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputEmpleadoNuevaFicha"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Buscar..." />
-    </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/text_fichas_cinicas18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Subcategoría:"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/spinnerCategoriaNuevaFicha"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerCategoriaNuevaFicha" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout3"
-        android:layout_width="293dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="@+id/text_fichas_cinicas16"
-        app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas16">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout"
+                android:layout_width="293dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="@+id/text_fichas_cinicas14"
+                app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas14">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputPacienteNuevaFicha"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Buscar..." />
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputEmpleadoNuevaFicha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Buscar..."/>
+<!--                    TODO: poner cuando esté el model para las personas-->
+<!--                    android:text="@{ficha.idCliente.toString()}"-->
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <Spinner
-        android:id="@+id/spinnerCategoriaNuevaFicha"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout3"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout3"
-        app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas17" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout3"
+                android:layout_width="293dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="@+id/text_fichas_cinicas16"
+                app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas16">
 
-    <Spinner
-        android:id="@+id/spinnerSubcategoriaNuevaFicha"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout3"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/text_fichas_cinicas18"
-        app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas18" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputPacienteNuevaFicha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Buscar..."/>
+                <!--TODO: poner cuando esté el model para las personas-->
+<!--                android:text="@{ficha.idEmpleado.toString()}"-->
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout4"
-        android:layout_width="293dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="@+id/spinnerSubcategoriaNuevaFicha"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerSubcategoriaNuevaFicha">
+            <Spinner
+                android:id="@+id/spinnerCategoriaNuevaFicha"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout3"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout3"
+                app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas17" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputMotivoNuevaFicha"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Motivo:" />
+            <Spinner
+                android:id="@+id/spinnerSubcategoriaNuevaFicha"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout3"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/text_fichas_cinicas18"
+                app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas18" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout4"
+                android:layout_width="293dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="@+id/spinnerSubcategoriaNuevaFicha"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerSubcategoriaNuevaFicha">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout5"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout4"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout4"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputMotivoNuevaFicha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Motivo:"
+                    android:text="@={ficha.motivoConsulta}"/>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputDiagnosticoNuevaFicha"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Diagnóstico:" />
-    </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout6"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout5"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout5"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout4"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout4"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputObservacionNuevaFicha"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Observación:" />
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputDiagnosticoNuevaFicha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Diagnóstico:"
+                    android:text="@={ficha.diagnostico}"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/textViewSpinnerCategoriaNuevaFicha"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/spinnerCategoriaNuevaFicha"
-        app:layout_constraintEnd_toEndOf="@+id/spinnerCategoriaNuevaFicha"
-        app:layout_constraintStart_toStartOf="@+id/spinnerCategoriaNuevaFicha"
-        app:layout_constraintTop_toTopOf="@+id/spinnerCategoriaNuevaFicha" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout5"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout5"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout5">
 
-        <Button
-            android:id="@+id/btnGuardarNuevaFicha"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Guardar"
-            app:layout_constraintStart_toStartOf="@+id/textInputLayout6"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout6" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputObservacionNuevaFicha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Observación:"
+                    android:text="@={ficha.observacion}"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/btnCancelarNuevaficha"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="Cancelar"
-            app:layout_constraintStart_toEndOf="@+id/btnGuardarNuevaFicha"
-            app:layout_constraintTop_toTopOf="@+id/btnGuardarNuevaFicha" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textViewSpinnerCategoriaNuevaFicha"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/spinnerCategoriaNuevaFicha"
+                app:layout_constraintEnd_toEndOf="@+id/spinnerCategoriaNuevaFicha"
+                app:layout_constraintStart_toStartOf="@+id/spinnerCategoriaNuevaFicha"
+                app:layout_constraintTop_toTopOf="@+id/spinnerCategoriaNuevaFicha" />
+
+            <Button
+                android:id="@+id/btnGuardarNuevaFicha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Guardar"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout6"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout6" />
+
+            <Button
+                android:id="@+id/btnCancelarNuevaficha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="Cancelar"
+                app:layout_constraintStart_toEndOf="@+id/btnGuardarNuevaFicha"
+                app:layout_constraintTop_toTopOf="@+id/btnGuardarNuevaFicha" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</FrameLayout>
+    </FrameLayout>
+</layout>
