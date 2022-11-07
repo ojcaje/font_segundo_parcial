@@ -21,4 +21,8 @@ public class RetrofitUtil {
     public static FichaClinicaService getFichaClinicaService(){
         return RetrofitUtil.getClient(URL_BASE).create(FichaClinicaService.class);
     }
+
+    public static ReservaService getReservaService(){
+        return RetrofitUtil.getClient(URL_BASE).create(ReservaService.class);
+    }
 }

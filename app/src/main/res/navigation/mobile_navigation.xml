@@ -28,4 +28,10 @@
         android:name="com.example.font_segundo_parcial.ui.fichas_clinicas.FichasClinicasFragment"
         android:label="Fichas Clínicas"
         tools:layout="@layout/fragment_fichas_clinicas" />
+
+    <fragment
+        android:id="@+id/nav_reservas"
+        android:name="com.example.font_segundo_parcial.ui.reservas.ReservasFragment"
+        android:label="Reservas"
+        tools:layout="@layout/fragment_reservas" />
 </navigation>
