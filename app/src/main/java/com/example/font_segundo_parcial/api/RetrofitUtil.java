@@ -25,4 +25,8 @@ public class RetrofitUtil {
     public static ReservaService getReservaService(){
         return RetrofitUtil.getClient(URL_BASE).create(ReservaService.class);
     }
+
+    public static PersonaService getPersonaService(){
+        return RetrofitUtil.getClient(URL_BASE).create(PersonaService.class);
+    }
 }

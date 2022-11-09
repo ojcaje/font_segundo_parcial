@@ -76,16 +76,17 @@
                 android:layout_marginBottom="12sp"
                 android:text="Fisioterapeuta:" />
 
-            <com.google.android.material.textfield.TextInputLayout
+            <android.widget.SearchView
+                android:id="@+id/fisioterapeutaFiltradoReservas"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                tools:visibility="visible" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/fisioterapeuta"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Buscar..." />
-            </com.google.android.material.textfield.TextInputLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listadoFisioterapeutasReservas"
+                android:layout_width="match_parent"
+                android:layout_height="115dp"
+                android:layout_marginTop="12sp" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -96,28 +97,22 @@
                 android:layout_weight="1"
                 android:text="Paciente:" />
 
-            <com.google.android.material.textfield.TextInputLayout
+            <android.widget.SearchView
+                android:id="@+id/pacienteFiltradoReservas"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                tools:visibility="visible" />
 
-                <View
-                    android:id="@+id/divider11"
-                    android:layout_width="match_parent"
-                    android:layout_height="12dp"
-                    android:layout_weight="1"
-                    android:background="?android:attr/listDivider"
-                    tools:visibility="invisible" />
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/paciente"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Buscar..." />
-            </com.google.android.material.textfield.TextInputLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listadoPacientesReservas"
+                android:layout_width="match_parent"
+                android:layout_height="115dp"
+                android:layout_marginTop="12sp" />
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="12sp"
                 android:gravity="center_horizontal">
 
                 <Button
@@ -139,6 +134,17 @@
                     android:layout_height="wrap_content"
                     android:text="Nueva Reserva" />
             </TableRow>
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12sp"
+                android:layout_marginBottom="12sp"
+                android:text="Resultados"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listaReservas"
