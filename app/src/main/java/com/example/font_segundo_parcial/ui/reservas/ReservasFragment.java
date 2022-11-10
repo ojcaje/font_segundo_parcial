@@ -1,6 +1,7 @@
 package com.example.font_segundo_parcial.ui.reservas;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,17 +12,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.font_segundo_parcial.R;
-import com.example.font_segundo_parcial.api.AdapterPersona;
 import com.example.font_segundo_parcial.api.AdapterReserva;
 import com.example.font_segundo_parcial.api.Datos;
 import com.example.font_segundo_parcial.api.Persona;
 import com.example.font_segundo_parcial.api.Reserva;
 import com.example.font_segundo_parcial.api.RetrofitUtil;
+import com.example.font_segundo_parcial.api.SingleAdapterPersona;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,6 +51,7 @@ public class ReservasFragment extends Fragment {
 
     private RecyclerView rvReservas;
     private AdapterReserva adapterReserva;
+
     List<Reserva> reservas;
     private TextView fechaDesdeTxt;
     private Date fechaDesde;
@@ -59,12 +63,15 @@ public class ReservasFragment extends Fragment {
     private Persona fisioterapeuta;
     ArrayList<Persona> fisioterapeutas;
     ArrayList<Persona> pacientes;
-    private AdapterPersona adapterFisio;
-    private AdapterPersona adapterPaciente;
+    //private AdapterPersona adapterFisio;
+    //private AdapterPersona adapterPaciente;
+    private SingleAdapterPersona adapterFisio;
+    private SingleAdapterPersona adapterPaciente;
     private RecyclerView rvFisio;
     private RecyclerView rvPaciente;
     private SearchView buscarFisio;
     private SearchView buscarPaciente;
+    private Button filtrar;
     public static ReservasFragment fragment;
 
 
@@ -120,7 +127,7 @@ public class ReservasFragment extends Fragment {
         //listado de reservas
         rvReservas = view.findViewById(R.id.listaReservas);
         rvReservas.setLayoutManager(new LinearLayoutManager(getContext()));
-        obtenerReservas();
+        obtenerReservas(new JSONObject());
 
         //listado de fisioterapeutas
         rvFisio = view.findViewById(R.id.listadoFisioterapeutasReservas);
@@ -131,8 +138,8 @@ public class ReservasFragment extends Fragment {
         rvPaciente.setLayoutManager(new LinearLayoutManager(getContext()));
 
         try {
-            obtenerFisioterapeutas();
-            obtenerPacientes();
+            obtenerFisioterapeutas(getContext());
+            obtenerPacientes(getContext());
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -201,10 +208,32 @@ public class ReservasFragment extends Fragment {
         });
 
 
+        //boton filtrado
+        filtrar = view.findViewById(R.id.filtrarReservas);
+        filtrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                filtrado();
+            }
+        });
+
         return view;
 
     }
 
+    private void filtrado(){
+        if(adapterFisio!= null && adapterPaciente != null){
+            showToast(adapterFisio.getSelected(), adapterPaciente.getSelected());
+        }else{
+            Toast.makeText(getContext(), "algun nulo", Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
+    private void showToast(Persona fisioterapeuta, Persona paciente){
+        String msg = new String( fisioterapeuta.getNombre() + paciente.getNombre());
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+    }
 
     private void openDatePicker(TextView fechaTxt) {
         Calendar calendar = Calendar.getInstance();
@@ -235,9 +264,9 @@ public class ReservasFragment extends Fragment {
     }
 
 
-    public void obtenerReservas() {
+    public void obtenerReservas(JSONObject filtro) {
         Call<Datos<Reserva>> callApi = RetrofitUtil.getReservaService()
-                .getReservas(new JSONObject());
+                .getReservas(filtro);
         callApi.enqueue(new Callback<Datos<Reserva>>() {
             @Override
             public void onResponse(Call<Datos<Reserva>> call, Response<Datos<Reserva>> response) {
@@ -245,13 +274,6 @@ public class ReservasFragment extends Fragment {
                 reservas = Arrays.asList(response.body().getLista());
                 adapterReserva = new AdapterReserva(reservas);
                 rvReservas.setAdapter(adapterReserva);
-
-                // log
-                Log.i("s","reservas");
-                for (Reserva r: reservas)
-                {
-                    Log.i("s", r.getFechaCadena());
-                }
 
             }
 
@@ -262,7 +284,7 @@ public class ReservasFragment extends Fragment {
         });
     }
 
-    public void obtenerFisioterapeutas() throws JSONException {
+    public void obtenerFisioterapeutas(Context context) throws JSONException {
 
         JSONObject params = new JSONObject();
         params.put("soloUsuariosDelSistema", true);
@@ -273,15 +295,8 @@ public class ReservasFragment extends Fragment {
             public void onResponse(Call<Datos<Persona>> call, Response<Datos<Persona>> response) {
 
                 fisioterapeutas = new ArrayList<>(Arrays.asList(response.body().getLista()));
-                adapterFisio = new AdapterPersona(fisioterapeutas);
+                adapterFisio = new SingleAdapterPersona(context, fisioterapeutas);
                 rvFisio.setAdapter(adapterFisio);
-
-                // log
-                Log.i("s","fisioterapeutas");
-                for (Persona r: fisioterapeutas)
-                {
-                    Log.i("s", r.getNombreCompleto());
-                }
 
             }
 
@@ -292,7 +307,7 @@ public class ReservasFragment extends Fragment {
         });
     }
 
-    public void obtenerPacientes() throws JSONException {
+    public void obtenerPacientes(Context context) throws JSONException {
 
         JSONObject params = new JSONObject();
         params.put("soloUsuariosDelSistema", false);
@@ -303,15 +318,8 @@ public class ReservasFragment extends Fragment {
             public void onResponse(Call<Datos<Persona>> call, Response<Datos<Persona>> response) {
 
                 pacientes =new ArrayList<>( Arrays.asList( response.body().getLista() ));
-                adapterPaciente = new AdapterPersona(pacientes);
+                adapterPaciente = new SingleAdapterPersona(context, pacientes);
                 rvPaciente.setAdapter(adapterPaciente);
-
-                // log
-                Log.i("s","pacientes");
-                for (Persona r: pacientes)
-                {
-                    Log.i("s", r.getNombreCompleto());
-                }
 
             }
 
@@ -322,26 +330,4 @@ public class ReservasFragment extends Fragment {
         });
     }
 
-    /*@Override
-    public boolean onQueryTextSubmit(String s) {
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String s) {
-        if(s != null) {
-
-            /*
-            Al ir a otro fragmento y regresar a este, por alguna razon ninguno de los atributos del fragmento
-            actual estan inicializados y este segmento de codigo es ejecutado lanzando error, por lo que se coloca
-            la siguiente condicion para evitar su ejecucion antes de que el fragmento este completamente incializado
-            */
-
-    /*        if(adapterFisio != null) {
-                adapterFisio.filtrado(s);
-            }
-
-        }
-        return false;
-    }*/
 }

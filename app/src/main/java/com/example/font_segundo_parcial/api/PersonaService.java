@@ -14,6 +14,6 @@ public interface PersonaService {
     })
     @GET("persona")
     Call<Datos<Persona>> getPersonas(
-            @Query("query") JSONObject json
+            @Query("ejemplo") JSONObject json
     );
 }
