@@ -27,7 +27,7 @@ public class AdapterFichaClinica extends RecyclerView.Adapter<AdapterFichaClinic
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_ficha_clinica, parent, false);
-        ViewHolder pvh=new ViewHolder(v);
+        ViewHolder pvh = new ViewHolder(v);
 
         return pvh;
     }
@@ -40,23 +40,8 @@ public class AdapterFichaClinica extends RecyclerView.Adapter<AdapterFichaClinic
     public void onBindViewHolder(@NonNull AdapterFichaClinica.ViewHolder viewHolder, int position) {
 
         // setear los datos de la ficha clínica actual
-        // TODO: dejar de usar JSONObject cuando ya estén las clases correspondientes a cada elemento
-        try {
-            viewHolder.tvCliente.setText(
-                    new StringBuilder().append((new JSONObject((dsFichas[position].getIdCliente()
-                            .toString().replaceAll(" +", ""))))
-                            .get("nombre").toString()).append((new JSONObject((dsFichas[position].getIdCliente()
-                            .toString().replaceAll(" +", ""))))
-                            .get("idPersona").toString()).toString()
-            );
-            viewHolder.tvProfesional.setText(
-                    (new JSONObject((dsFichas[position].getIdEmpleado()
-                            .toString().replaceAll(" +",""))))
-                            .get("nombre").toString()
-            );
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        viewHolder.tvCliente.setText(dsFichas[position].getIdCliente().getNombreCompleto());
+        viewHolder.tvProfesional.setText(dsFichas[position].getIdEmpleado().getNombreCompleto());
         viewHolder.tvSubcategoria.setText(dsFichas[position].getIdTipoProducto().getDescripcion());
         viewHolder.tvFecha.setText(dsFichas[position].getFechaHoraCadenaFormateada());
 
@@ -65,7 +50,7 @@ public class AdapterFichaClinica extends RecyclerView.Adapter<AdapterFichaClinic
         viewHolder.btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(view.getContext(), EditarFichaClinicaActivity.class);
+                Intent i = new Intent(view.getContext(), EditarFichaClinicaActivity.class);
                 i.putExtra("idFicha", idFicha);
                 view.getContext().startActivity(i);
             }
@@ -86,15 +71,15 @@ public class AdapterFichaClinica extends RecyclerView.Adapter<AdapterFichaClinic
 
         public ViewHolder(View v) {
             super(v);
-            tvFecha=v.findViewById(R.id.txtFecha);
-            tvProfesional=v.findViewById(R.id.txtProfesional);
-            tvCliente=v.findViewById(R.id.txtCliente);
-            tvSubcategoria=v.findViewById(R.id.txtSubcategoria);
-            btnEditar=v.findViewById(R.id.btnEditar);
+            tvFecha = v.findViewById(R.id.txtFecha);
+            tvProfesional = v.findViewById(R.id.txtProfesional);
+            tvCliente = v.findViewById(R.id.txtCliente);
+            tvSubcategoria = v.findViewById(R.id.txtSubcategoria);
+            btnEditar = v.findViewById(R.id.btnEditar);
         }
     }
 
-    public AdapterFichaClinica(FichaClinica[] listaDeFichasClinicas){
-        this.dsFichas=listaDeFichasClinicas;
+    public AdapterFichaClinica(FichaClinica[] listaDeFichasClinicas) {
+        this.dsFichas = listaDeFichasClinicas;
     }
 }

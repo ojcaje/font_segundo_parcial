@@ -15,8 +15,10 @@ import android.widget.Toast;
 
 import com.example.font_segundo_parcial.R;
 import com.example.font_segundo_parcial.api.Datos;
+import com.example.font_segundo_parcial.api.Persona;
 import com.example.font_segundo_parcial.api.RetrofitUtil;
 import com.example.font_segundo_parcial.api.models.FichaClinica;
+import com.example.font_segundo_parcial.api.models.FichaClinicaPost;
 import com.example.font_segundo_parcial.api.models.Subcategoria;
 
 import java.util.Objects;
@@ -52,14 +54,14 @@ public class NuevaFichaClinicaActivity
 
     // al recibir los datos de la ficha, hacemos post
     @Override
-    public void datosFicha(Integer empleado, Integer paciente, Subcategoria subcategoria,
+    public void datosFicha(Persona empleado, Persona paciente, Subcategoria subcategoria,
                            String motivo, String diagnostico, String observacion) {
 
         // crear la nueva ficha
-        FichaClinica nuevaFicha = new FichaClinica();
+        FichaClinicaPost nuevaFicha = new FichaClinicaPost();
         nuevaFicha.setDiagnostico(diagnostico);
-        nuevaFicha.setIdCliente(paciente);
-        nuevaFicha.setIdEmpleado(empleado);
+        nuevaFicha.setIdCliente(paciente.getIdPersona());
+        nuevaFicha.setIdEmpleado(empleado.getIdPersona());
         nuevaFicha.setIdTipoProducto(subcategoria);
         nuevaFicha.setMotivoConsulta(motivo);
         nuevaFicha.setObservacion(observacion);
@@ -67,11 +69,11 @@ public class NuevaFichaClinicaActivity
         NuevaFichaClinicaActivity estaActividad = this;
 
         // hacer el post
-        Call<Datos<FichaClinica>> callApi= RetrofitUtil.getFichaClinicaService()
+        Call<Datos<FichaClinicaPost>> callApi= RetrofitUtil.getFichaClinicaService()
                 .agregarFichaClinica(nuevaFicha);
-        callApi.enqueue(new Callback<Datos<FichaClinica>>() {
+        callApi.enqueue(new Callback<Datos<FichaClinicaPost>>() {
             @Override
-            public void onResponse(Call<Datos<FichaClinica>> call, Response<Datos<FichaClinica>> response) {
+            public void onResponse(Call<Datos<FichaClinicaPost>> call, Response<Datos<FichaClinicaPost>> response) {
                 if(response.isSuccessful()){
                     Toast.makeText(estaActividad, "Éxito al crear ficha", Toast.LENGTH_LONG).show();
                     estaActividad.finish();
@@ -83,7 +85,7 @@ public class NuevaFichaClinicaActivity
             }
 
             @Override
-            public void onFailure(Call<Datos<FichaClinica>> call, Throwable t) {
+            public void onFailure(Call<Datos<FichaClinicaPost>> call, Throwable t) {
                 Log.e("s", "Error al hacer post");
                 Toast.makeText(estaActividad, "Error al guardar", Toast.LENGTH_LONG).show();
             }

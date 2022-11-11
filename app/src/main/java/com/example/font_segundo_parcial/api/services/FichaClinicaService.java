@@ -2,6 +2,7 @@ package com.example.font_segundo_parcial.api.services;
 
 import com.example.font_segundo_parcial.api.Datos;
 import com.example.font_segundo_parcial.api.models.FichaClinica;
+import com.example.font_segundo_parcial.api.models.FichaClinicaPost;
 
 import org.json.JSONObject;
 
@@ -28,7 +29,7 @@ public interface FichaClinicaService {
             "usuario: usuario5"
     })
     @POST("fichaClinica")
-    Call<Datos<FichaClinica>> agregarFichaClinica(@Body FichaClinica ficha);
+    Call<Datos<FichaClinicaPost>> agregarFichaClinica(@Body FichaClinicaPost ficha);
 
     @Headers({
             "Accept: application/json"
