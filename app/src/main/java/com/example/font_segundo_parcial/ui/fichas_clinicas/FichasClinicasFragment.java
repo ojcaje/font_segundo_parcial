@@ -1,5 +1,8 @@
 package com.example.font_segundo_parcial.ui.fichas_clinicas;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +19,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -24,14 +28,21 @@ import android.widget.Toast;
 import com.example.font_segundo_parcial.R;
 import com.example.font_segundo_parcial.api.AdapterFichaClinica;
 import com.example.font_segundo_parcial.api.Datos;
+import com.example.font_segundo_parcial.api.Persona;
 import com.example.font_segundo_parcial.api.models.FichaClinica;
 import com.example.font_segundo_parcial.api.RetrofitUtil;
 import com.example.font_segundo_parcial.api.models.Categoria;
 import com.example.font_segundo_parcial.api.models.Subcategoria;
+import com.example.font_segundo_parcial.ui.persona.PersonaPickerActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -50,6 +61,9 @@ public class FichasClinicasFragment extends Fragment {
     FichaClinica[] fichasClinicas;
     Categoria[] categorias;
     Subcategoria[] subcategorias;
+
+    Persona fisioterapeuta;
+    Persona paciente;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -113,6 +127,30 @@ public class FichasClinicasFragment extends Fragment {
         // establecer onClickListener para el botón de filtrar fichas
         filtrarFichasOnClickListener(vista);
 
+        // para que los botones de filtrar clientes y pacientes funcionen
+        filtrarFisioterapeutasOnClickListener(vista);
+        filtrarClientesOnClickListener(vista);
+
+        // para los filtros de fecha
+        TextInputEditText fechaDesde = vista.findViewById(R.id.inputFechaDesdeFiltroFichas);
+        fechaDesde.setFocusable(false);
+        fechaDesde.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        openDatePicker(fechaDesde);
+                    }
+                });
+        TextInputEditText fechaHasta = vista.findViewById(R.id.inputFechaHastaFiltroFicha);
+        fechaHasta.setFocusable(false);
+        fechaHasta.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        openDatePicker(fechaHasta);
+                    }
+                });
+
         // Inflate the layout for this fragment
         return vista;
     }
@@ -156,7 +194,6 @@ public class FichasClinicasFragment extends Fragment {
         });
     }
 
-
     /**
      * Para establecer un OnClickListener para filtrar las fichas clínicas
      * @param vista La vista actual
@@ -175,17 +212,12 @@ public class FichasClinicasFragment extends Fragment {
         });
     }
 
-
     /**
      * Filtrar las fichas por los campos de búsqueda
      */
     private void filtrarFichas(){
 
         // obtener los valores de los campos de búsqueda
-        String textoInputPaciente = ((TextInputEditText)getActivity()
-                .findViewById(R.id.inputPacienteFiltroFichaClinica)).getText().toString();
-        String textoInputFisioterapeuta = ((TextInputEditText)getActivity()
-                .findViewById(R.id.inputFisioterapeutaFiltroFicha)).getText().toString();
         String textoFechaDesde = ((EditText)getActivity()
                 .findViewById(R.id.inputFechaDesdeFiltroFichas)).getText().toString();
         String textoFechaHasta = ((EditText)getActivity()
@@ -197,14 +229,14 @@ public class FichasClinicasFragment extends Fragment {
         JSONObject filtro = new JSONObject();
         try {
 
-            if (!textoInputPaciente.equals("")){
+            if (paciente!=null){
                 filtro.accumulate("idCliente",
-                        new JSONObject("{idPersona:"+ textoInputPaciente + "}"));
+                        new JSONObject("{idPersona:"+ paciente.getIdPersona() + "}"));
             }
 
-            if (!textoInputFisioterapeuta.equals("")){
+            if (fisioterapeuta!=null){
                 filtro.accumulate("idEmpleado",
-                        new JSONObject("{idPersona:"+ textoInputFisioterapeuta + "}"));
+                        new JSONObject("{idPersona:"+ fisioterapeuta.getIdPersona() + "}"));
             }
 
             if (!textoFechaDesde.equals("")){
@@ -365,5 +397,104 @@ public class FichasClinicasFragment extends Fragment {
         Spinner spinnerSubcategorias = (Spinner) getActivity()
                 .findViewById(R.id.spinnerSubcategoriaFiltroFicha);
         spinnerSubcategorias.setAdapter(aaSubcategorias);
+    }
+
+    /**
+     * Recibir la persona elegida y su tipo
+     */
+    public void recibirPersona(Persona persona, Boolean soloUsuariosDelSistema){
+        // si es un fisioterapeuta
+        if(soloUsuariosDelSistema){
+            this.fisioterapeuta = persona;
+        } else {
+            this.paciente = persona;
+        }
+    }
+
+    /**
+     * Para los botones de elegir fisioterapeuta o paciente
+     */
+    public void elegirCliente(Boolean esFisioterapeuta){
+        Intent i = new Intent(getActivity(), PersonaPickerActivity.class);
+        i.putExtra("soloUsuariosDelSistema", esFisioterapeuta);
+        startActivityForResult(i, 1);
+    }
+
+    /**
+     * Para recibir de la otra actividad la persona elegida
+     */
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            // si se recibe un fisioterapeuta
+            if(data.getBooleanExtra("soloUsuariosDelSistema", false)){
+                fisioterapeuta = (Persona)data.getSerializableExtra("persona");
+                TextInputEditText textoFisio = getView()
+                        .findViewById(R.id.inputFisioterapeutaFiltroFicha);
+                textoFisio.setText(fisioterapeuta.getNombreCompleto());
+            } else {
+                paciente = (Persona) data.getSerializableExtra("persona");
+                TextInputEditText textoPaciente = getView()
+                        .findViewById(R.id.inputPacienteFiltroFichaClinica);
+                textoPaciente.setText(paciente.getNombreCompleto());
+            }
+        }
+    }
+
+    /**
+     * Para establecer un OnClickListener para filtrar los fisioterapeutas
+     * @param vista La vista actual
+     */
+    private void filtrarFisioterapeutasOnClickListener(View vista){
+        TextInputEditText textoFisio = vista.findViewById(R.id.inputFisioterapeutaFiltroFicha);
+        textoFisio.setFocusable(false);
+        textoFisio.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                elegirCliente(true);
+            }
+        });
+    }
+
+    /**
+     * Para establecer un OnClickListener para filtrar los clientes
+     * @param vista La vista actual
+     */
+    private void filtrarClientesOnClickListener(View vista){
+        TextInputEditText inputCliente = vista.findViewById(R.id.inputPacienteFiltroFichaClinica);
+        inputCliente.setFocusable(false);
+        inputCliente.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                elegirCliente(false);
+            }
+        });
+    }
+
+
+    private void openDatePicker(TextInputEditText fechaTxt) {
+        Calendar calendar = Calendar.getInstance();
+
+        int YEAR = calendar.get(Calendar.YEAR);
+        int MONTH = calendar.get(Calendar.MONTH);
+        int DATE = calendar.get(Calendar.DATE);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                month = month + 1;
+                String strFecha = year + "/" + month + "/" + dayOfMonth;
+                fechaTxt.setText(parseDate(strFecha));
+            }
+        } , YEAR , MONTH , DATE);
+        datePickerDialog.show();
+    }
+
+    private String parseDate(String date) {
+        try {
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+            return formato.format(formato.parse(date));
+        } catch (ParseException e) {
+            return null;
+        }
     }
 }

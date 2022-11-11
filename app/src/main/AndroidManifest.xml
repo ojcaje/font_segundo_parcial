@@ -16,6 +16,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.persona.PersonaPickerActivity"
+            android:exported="false"
+            android:label="@string/title_activity_persona_picker"
+            android:theme="@style/Theme.Font_segundo_parcial">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.fichas_clinicas.EditarFichaClinicaActivity"
             android:exported="false"
             android:label="@string/title_activity_editar_ficha_clinica"

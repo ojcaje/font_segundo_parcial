@@ -109,7 +109,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout9" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout1"
+                android:id="@+id/textInputFisioFiltroFicha"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -161,7 +161,7 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:layout_constraintStart_toStartOf="@+id/textInputLayout1"
+                app:layout_constraintStart_toStartOf="@+id/textInputFisioFiltroFicha"
                 app:layout_constraintTop_toBottomOf="@+id/text_fichas_cinicas4">
 
                 <com.google.android.material.textfield.TextInputEditText

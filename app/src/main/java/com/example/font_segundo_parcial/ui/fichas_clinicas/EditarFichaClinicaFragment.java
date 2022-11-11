@@ -1,5 +1,8 @@
 package com.example.font_segundo_parcial.ui.fichas_clinicas;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,9 +20,11 @@ import android.widget.Toast;
 
 import com.example.font_segundo_parcial.R;
 import com.example.font_segundo_parcial.api.Datos;
+import com.example.font_segundo_parcial.api.Persona;
 import com.example.font_segundo_parcial.api.RetrofitUtil;
 import com.example.font_segundo_parcial.api.models.Categoria;
 import com.example.font_segundo_parcial.api.models.Subcategoria;
+import com.example.font_segundo_parcial.ui.persona.PersonaPickerActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;
@@ -40,6 +45,9 @@ public class EditarFichaClinicaFragment extends Fragment {
 
     Categoria[] categorias;
     Subcategoria[] subcategorias;
+
+    Persona fisioterapeuta;
+    Persona paciente;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -107,10 +115,6 @@ public class EditarFichaClinicaFragment extends Fragment {
             public void onClick(View v) {
 
                 // obtener los valores de los campos de la ficha
-                String paciente = ((TextInputEditText)getActivity()
-                        .findViewById(R.id.inputPacienteNuevaFicha)).getText().toString();
-                String fisioterapeuta = ((TextInputEditText)getActivity()
-                        .findViewById(R.id.inputEmpleadoNuevaFicha)).getText().toString();
                 Subcategoria subcategoria = (Subcategoria) ((Spinner) getActivity()
                         .findViewById(R.id.spinnerSubcategoriaNuevaFicha)).getSelectedItem();
                 String motivo = ((TextInputEditText)getActivity()
@@ -122,8 +126,8 @@ public class EditarFichaClinicaFragment extends Fragment {
 
                 // enviar los datos al activity
                 ((ComunicaEditarFichaClinica)getActivity()).datosFicha(
-                        (!fisioterapeuta.equals("")) ? Integer.parseInt(fisioterapeuta) : null,
-                        (!paciente.equals("")) ? Integer.parseInt(paciente) : null,
+                        fisioterapeuta,
+                        paciente,
                         subcategoria,
                         motivo,
                         diagnostico,
@@ -131,6 +135,10 @@ public class EditarFichaClinicaFragment extends Fragment {
                 );
             }
         });
+
+        // para que los botones de filtrar clientes y pacientes funcionen
+        filtrarFisioterapeutasOnClickListener(vista);
+        filtrarClientesOnClickListener(vista);
 
         return vista;
     }
@@ -262,5 +270,63 @@ public class EditarFichaClinicaFragment extends Fragment {
         Spinner spinnerSubcategorias = (Spinner) getActivity()
                 .findViewById(R.id.spinnerSubcategoriaNuevaFicha);
         spinnerSubcategorias.setAdapter(aaSubcategorias);
+    }
+
+    /**
+     * Para los botones de elegir fisioterapeuta o paciente
+     */
+    public void elegirCliente(Boolean esFisioterapeuta){
+        Intent i = new Intent(getActivity(), PersonaPickerActivity.class);
+        i.putExtra("soloUsuariosDelSistema", esFisioterapeuta);
+        startActivityForResult(i, 1);
+    }
+
+    /**
+     * Para recibir de la otra actividad la persona elegida
+     */
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            // si se recibe un fisioterapeuta
+            if(data.getBooleanExtra("soloUsuariosDelSistema", false)){
+                fisioterapeuta = (Persona)data.getSerializableExtra("persona");
+                TextInputEditText textoFisio = getView()
+                        .findViewById(R.id.inputEmpleadoNuevaFicha);
+                textoFisio.setText(fisioterapeuta.getNombreCompleto());
+            } else {
+                paciente = (Persona) data.getSerializableExtra("persona");
+                TextInputEditText textoPaciente = getView()
+                        .findViewById(R.id.inputPacienteNuevaFicha);
+                textoPaciente.setText(paciente.getNombreCompleto());
+            }
+        }
+    }
+
+    /**
+     * Para establecer un OnClickListener para filtrar los fisioterapeutas
+     * @param vista La vista actual
+     */
+    private void filtrarFisioterapeutasOnClickListener(View vista){
+        TextInputEditText textoFisio = vista.findViewById(R.id.inputEmpleadoNuevaFicha);
+        textoFisio.setFocusable(false);
+        textoFisio.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                elegirCliente(true);
+            }
+        });
+    }
+
+    /**
+     * Para establecer un OnClickListener para filtrar los clientes
+     * @param vista La vista actual
+     */
+    private void filtrarClientesOnClickListener(View vista){
+        TextInputEditText inputCliente = vista.findViewById(R.id.inputPacienteNuevaFicha);
+        inputCliente.setFocusable(false);
+        inputCliente.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                elegirCliente(false);
+            }
+        });
     }
 }

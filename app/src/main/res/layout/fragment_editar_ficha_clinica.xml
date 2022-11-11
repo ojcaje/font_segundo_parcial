@@ -82,9 +82,9 @@
                     android:id="@+id/inputEmpleadoNuevaFicha"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Buscar..."/>
-<!--                    TODO: poner cuando esté el model para las personas-->
-<!--                    android:text="@{ficha.idCliente.toString()}"-->
+                    android:hint="Buscar..."
+                    android:text="@{ficha.idCliente.getNombreCompleto()}"/>
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -99,9 +99,9 @@
                     android:id="@+id/inputPacienteNuevaFicha"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Buscar..."/>
-                <!--TODO: poner cuando esté el model para las personas-->
-<!--                android:text="@{ficha.idEmpleado.toString()}"-->
+                    android:hint="Buscar..."
+                android:text="@{ficha.idEmpleado.getNombreCompleto()}"/>
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <Spinner

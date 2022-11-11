@@ -3,7 +3,9 @@ package com.example.font_segundo_parcial.api;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Persona {
+import java.io.Serializable;
+
+public class Persona implements Serializable {
     @SerializedName("idPersona")
     @Expose
     private Integer idPersona;
