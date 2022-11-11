@@ -52,7 +52,7 @@ public class ReservasFragment extends Fragment {
     private RecyclerView rvReservas;
     private AdapterReserva adapterReserva;
 
-    List<Reserva> reservas;
+    ArrayList<Reserva> reservas;
     private TextView fechaDesdeTxt;
     private Date fechaDesde;
     private TextView fechaHastaTxt;
@@ -222,16 +222,54 @@ public class ReservasFragment extends Fragment {
     }
 
     private void filtrado(){
-        if(adapterFisio!= null && adapterPaciente != null){
-            showToast(adapterFisio.getSelected(), adapterPaciente.getSelected());
-        }else{
-            Toast.makeText(getContext(), "algun nulo", Toast.LENGTH_SHORT).show();
 
+        String fechaDesde = fechaDesdeTxt.getText().toString();
+        String fechaHasta = fechaHastaTxt.getText().toString();
+        int idPaciente, idFisio;
+
+        idPaciente = adapterPaciente.getSelected().getIdPersona();
+        idFisio = adapterFisio.getSelected().getIdPersona();
+
+        //String a = adapterPaciente.getSelected().getNombreCompleto();
+        //String b = adapterFisio.getSelected().getNombreCompleto();
+
+
+        JSONObject filtro = new JSONObject();
+
+        try {
+            if (!fechaDesde.equals("")) {
+                filtro.accumulate("fechaDesdeCadena", fechaDesde.replace("/", ""));
+            }
+
+            if (!fechaHasta.equals("")) {
+                filtro.accumulate("fechaHastaCadena", fechaHasta.replace("/", ""));
+            }
+
+            if(idPaciente != 0){
+                filtro.accumulate("idCliente",
+                        new JSONObject("{idPersona:" + idPaciente + "}")
+                );
+            }
+
+            if(idFisio != 0){
+                filtro.accumulate("idEmpleado",
+                        new JSONObject("{idPersona:" + idFisio + "}")
+                );
+            }
+
+
+        }catch (Exception e){
+            showToast("Error");
+            e.printStackTrace();
         }
+
+        reservas.clear();
+        obtenerReservas(filtro);
+
+
     }
 
-    private void showToast(Persona fisioterapeuta, Persona paciente){
-        String msg = new String( fisioterapeuta.getNombre() + paciente.getNombre());
+    private void showToast(String msg){
         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
@@ -246,21 +284,18 @@ public class ReservasFragment extends Fragment {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
-                month = month + 1;
-                String strFecha = dayOfMonth + "/" + month + "/" + year;
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, month, dayOfMonth);
+
+                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+                String strFecha = format.format(newDate.getTime());
+
                 fechaTxt.setText(strFecha);
             }
         } , YEAR , MONTH , DATE);
         datePickerDialog.show();
-    }
+        datePickerDialog.getDatePicker().setDescendantFocusability(DatePicker.FOCUS_BLOCK_DESCENDANTS);
 
-
-    private Date parseDate(String date) {
-        try {
-            return new SimpleDateFormat("yyyy/MM/dd").parse(date);
-        } catch (ParseException e) {
-            return null;
-        }
     }
 
 
@@ -271,7 +306,7 @@ public class ReservasFragment extends Fragment {
             @Override
             public void onResponse(Call<Datos<Reserva>> call, Response<Datos<Reserva>> response) {
 
-                reservas = Arrays.asList(response.body().getLista());
+                reservas = new ArrayList<>(Arrays.asList(response.body().getLista()));
                 adapterReserva = new AdapterReserva(reservas);
                 rvReservas.setAdapter(adapterReserva);
 
