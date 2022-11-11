@@ -42,19 +42,35 @@
                 android:layout_marginBottom="12sp"
                 android:text="Fisioterapeuta:" />
 
-            <android.widget.SearchView
-                android:id="@+id/fisioterapeutaNuevaReserva"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:visibility="visible">
+                android:layout_height="match_parent">
 
-            </android.widget.SearchView>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fisioterapeutaNuevaReserva"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Buscar..." />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/listadoFisioterapeutasNuevaReserva"
+            <TextView
+                android:id="@+id/textView14"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_marginTop="12sp" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12sp"
+                android:layout_marginBottom="12sp"
+                android:text="Paciente:" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/pacienteNuevaReserva"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Buscar..." />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/textView8"

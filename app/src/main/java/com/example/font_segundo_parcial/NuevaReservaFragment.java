@@ -1,8 +1,11 @@
 package com.example.font_segundo_parcial;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -27,6 +30,8 @@ import com.example.font_segundo_parcial.api.Reserva;
 import com.example.font_segundo_parcial.api.RetrofitUtil;
 import com.example.font_segundo_parcial.api.SingleAdapterPersona;
 import com.example.font_segundo_parcial.api.SingleAdapterTurnos;
+import com.example.font_segundo_parcial.ui.persona.PersonaPickerActivity;
+import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,11 +53,10 @@ import retrofit2.Response;
 public class NuevaReservaFragment extends Fragment {
 
     ArrayList<Reserva> turnos;
-    private TextView tvHorario;
-    ArrayList<Persona> fisioterapeutas;
-    private SingleAdapterPersona adapterFisio;
-    private SearchView buscarFisio;
-    private RecyclerView rvFisio;
+    private Persona fisio;
+    private Persona paciente;
+    private TextInputEditText fisioTxt;
+    private TextInputEditText pacienteTxt;
     private Button filtrar;
     private TextView tvFecha;
     private SingleAdapterTurnos adapterTurnos;
@@ -108,40 +112,11 @@ public class NuevaReservaFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_nueva_reserva, container, false);
 
-        //listado de fisioterapeutas
-        rvFisio = view.findViewById(R.id.listadoFisioterapeutasNuevaReserva);
-        rvFisio.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        try {
-            obtenerFisioterapeutas(getContext());
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        //busqueda de fisioterapeuta
-        buscarFisio = view.findViewById(R.id.fisioterapeutaNuevaReserva);
-        buscarFisio.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-
-                if(s != null) {
-
-                    if(adapterFisio != null) {
-                        adapterFisio.filtrado(s);
-                    }
-
-                }
-                return false;
-            }
-        });
 
         //datepicker
         tvFecha = view.findViewById(R.id.fechaTurno);
+        tvFecha.setFocusable(false);
         tvFecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -171,27 +146,42 @@ public class NuevaReservaFragment extends Fragment {
             }
         });
 
+        // para que los botones de filtrar clientes y pacientes funcionen
+        filtrarFisioterapeutasOnClickListener(view);
+        filtrarClientesOnClickListener(view);
+
 
         return view;
     }
 
     public void reservar(){
 
-        turnoSeleccionado = adapterTurnos.getSelected();
-        Persona fisio = adapterFisio.getSelected();
-        Persona paciente = adapterFisio.getSelected(); /////CAMBIAR/////
-        String fecha = tvFecha.getText().toString().replace("/", "");
-
         try {
-            if (turnoSeleccionado != null && !fecha.equals("")) {
-                JSONObject jsonObject = new JSONObject();
+            turnoSeleccionado = adapterTurnos.getSelected();
+            String fecha = tvFecha.getText().toString().replace("/", "");
+
+            if (turnoSeleccionado != null && !fecha.equals("") && fisio!=null && paciente!=null) {
+                /*JSONObject jsonObject = new JSONObject();
                 jsonObject.accumulate("fechaCadena", fecha);
                 jsonObject.accumulate("horaInicioCadena", turnoSeleccionado.getHoraInicioCadena());
                 jsonObject.accumulate("horaFinCadena", turnoSeleccionado.getHoraFinCadena());
                 jsonObject.accumulate("idEmpleado", "{idPersona:"+ fisio.getIdPersona() + "}" );
-                jsonObject.accumulate("idCliente", "{idPersona:"+ paciente.getIdPersona() + "}");
+                jsonObject.accumulate("idCliente", "{idPersona:"+ paciente.getIdPersona() + "}");*/
 
-                //post
+                Persona paciente_ = new Persona();
+                Persona fisio_ = new Persona();
+                paciente_.setIdPersona(paciente.getIdPersona());
+                fisio_.setIdPersona(fisio.getIdPersona());
+
+
+                Reserva r = new Reserva();
+                r.setFechaCadena(fecha);
+                r.setHoraInicioCadena(turnoSeleccionado.getHoraInicioCadena());
+                r.setHoraFinCadena(turnoSeleccionado.getHoraFinCadena());
+                r.setIdEmpleado(fisio_);
+                r.setIdCliente(paciente_);
+
+                postReserva(r);
                 obtenerTurnos(getContext(), fisio.getIdPersona(), fecha);
 
             } else {
@@ -203,17 +193,41 @@ public class NuevaReservaFragment extends Fragment {
         }
     }
 
+    public void postReserva(Reserva r){
+        Call<Datos<Reserva>> callApi = RetrofitUtil.getReservaService()
+                .agregarReserva(r);
+        callApi.enqueue(new Callback<Datos<Reserva>>() {
+            @Override
+            public void onResponse(Call<Datos<Reserva>> call, Response<Datos<Reserva>> response) {
+
+                if(response.isSuccessful()){
+                    Toast.makeText(getContext(), "Reserva agendada con éxito", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Log.e("s", "Error al hacer post");
+                    Toast.makeText(getContext(), "Error al reservar turno", Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Datos<Reserva>> call, Throwable t) {
+                Log.e("s", t.toString());
+            }
+        });
+    }
+
 
     private void filtrado(){
 
         String fecha = tvFecha.getText().toString();
-        int idPaciente, idFisio;
-        idFisio = adapterFisio.getSelected().getIdPersona();
+        int idFisio;
+        idFisio = fisio.getIdPersona();
 
         if(!fecha.equals("") && idFisio!=0) {
             obtenerTurnos(getContext(), idFisio, fecha.replace("/", ""));
         }else{
-            Toast.makeText(getContext(), "Ingresar fecha", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Ingresar fecha y fisioterapeuta", Toast.LENGTH_SHORT).show();
 
         }
 
@@ -244,33 +258,6 @@ public class NuevaReservaFragment extends Fragment {
         });
     }
 
-    public void obtenerFisioterapeutas(Context context) throws JSONException {
-
-        JSONObject params = new JSONObject();
-        params.put("soloUsuariosDelSistema", true);
-
-        Call<Datos<Persona>> callApi = RetrofitUtil.getPersonaService().getPersonas(params);
-        callApi.enqueue(new Callback<Datos<Persona>>() {
-            @Override
-            public void onResponse(Call<Datos<Persona>> call, Response<Datos<Persona>> response) {
-
-                try{
-                    fisioterapeutas = new ArrayList<>(Arrays.asList(response.body().getLista()));
-                    adapterFisio = new SingleAdapterPersona(context, fisioterapeutas);
-                    rvFisio.setAdapter(adapterFisio);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<Datos<Persona>> call, Throwable t) {
-                Log.e("s", t.toString());
-            }
-        });
-    }
-
 
     private void openDatePicker(TextView fechaTxt) {
         Calendar calendar = Calendar.getInstance();
@@ -295,5 +282,63 @@ public class NuevaReservaFragment extends Fragment {
         datePickerDialog.show();
         datePickerDialog.getDatePicker().setDescendantFocusability(DatePicker.FOCUS_BLOCK_DESCENDANTS);
 
+    }
+
+    /**
+     * Para los botones de elegir fisioterapeuta o paciente
+     */
+    public void elegirCliente(Boolean esFisioterapeuta){
+        Intent i = new Intent(getActivity(), PersonaPickerActivity.class);
+        i.putExtra("soloUsuariosDelSistema", esFisioterapeuta);
+        startActivityForResult(i, 1);
+    }
+
+    /**
+     * Para recibir de la otra actividad la persona elegida
+     */
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            // si se recibe un fisioterapeuta
+            if(data.getBooleanExtra("soloUsuariosDelSistema", false)){
+                fisio = (Persona)data.getSerializableExtra("persona");
+                TextInputEditText textoFisio = getView()
+                        .findViewById(R.id.fisioterapeutaNuevaReserva);
+                textoFisio.setText(fisio.getNombreCompleto());
+            } else {
+                paciente = (Persona) data.getSerializableExtra("persona");
+                TextInputEditText textoPaciente = getView()
+                        .findViewById(R.id.pacienteNuevaReserva);
+                textoPaciente.setText(paciente.getNombreCompleto());
+            }
+        }
+    }
+
+    /**
+     * Para establecer un OnClickListener para filtrar los fisioterapeutas
+     * @param vista La vista actual
+     */
+    private void filtrarFisioterapeutasOnClickListener(View vista){
+        TextInputEditText textoFisio = vista.findViewById(R.id.fisioterapeutaNuevaReserva);
+        textoFisio.setFocusable(false);
+        textoFisio.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                elegirCliente(true);
+            }
+        });
+    }
+
+    /**
+     * Para establecer un OnClickListener para filtrar los clientes
+     * @param vista La vista actual
+     */
+    private void filtrarClientesOnClickListener(View vista){
+        TextInputEditText inputCliente = vista.findViewById(R.id.pacienteNuevaReserva);
+        inputCliente.setFocusable(false);
+        inputCliente.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                elegirCliente(false);
+            }
+        });
     }
 }
