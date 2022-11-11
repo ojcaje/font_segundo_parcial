@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +19,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.font_segundo_parcial.NuevaReservaFragment;
 import com.example.font_segundo_parcial.R;
 import com.example.font_segundo_parcial.api.AdapterReserva;
 import com.example.font_segundo_parcial.api.Datos;
@@ -29,13 +31,11 @@ import com.example.font_segundo_parcial.api.SingleAdapterPersona;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -73,6 +73,8 @@ public class ReservasFragment extends Fragment {
     private SearchView buscarPaciente;
     private Button filtrar;
     public static ReservasFragment fragment;
+    private Button nuevaReserva;
+
 
 
 
@@ -217,9 +219,29 @@ public class ReservasFragment extends Fragment {
             }
         });
 
+
+        //btn nueva reserva
+        nuevaReserva = view.findViewById(R.id.btnNuevaReserva);
+        nuevaReserva.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                nuevaReserva(view);
+            }
+        });
+
+
         return view;
 
     }
+
+    public void nuevaReserva(View view){
+        Fragment newFragment = new NuevaReservaFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.nav_host_fragment_content_main, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
 
     private void filtrado(){
 
