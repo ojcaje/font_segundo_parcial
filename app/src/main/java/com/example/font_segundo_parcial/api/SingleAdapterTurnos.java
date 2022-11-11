@@ -97,7 +97,7 @@ public class SingleAdapterTurnos extends RecyclerView.Adapter<SingleAdapterTurno
             ivCheck = itemView.findViewById(R.id.checkTurno);
         }
 
-        void bind(final Reserva persona){
+        void bind(final Reserva reserva){
 
             if(checkedPosition == -1){
                 ivCheck.setBackgroundColor(Color.parseColor("#f2f4f7"));
@@ -110,7 +110,8 @@ public class SingleAdapterTurnos extends RecyclerView.Adapter<SingleAdapterTurno
                 }
             }
 
-            tvHorario.setText(persona.getHoraInicio());
+            String horario = reserva.getHoraInicioCadena() +" - "+ reserva.getHoraFinCadena();
+            tvHorario.setText(horario);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

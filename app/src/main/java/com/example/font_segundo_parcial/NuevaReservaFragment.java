@@ -3,8 +3,10 @@ package com.example.font_segundo_parcial;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +21,6 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.font_segundo_parcial.api.AdapterReserva;
 import com.example.font_segundo_parcial.api.Datos;
 import com.example.font_segundo_parcial.api.Persona;
 import com.example.font_segundo_parcial.api.Reserva;
@@ -56,6 +57,8 @@ public class NuevaReservaFragment extends Fragment {
     private TextView tvFecha;
     private SingleAdapterTurnos adapterTurnos;
     private RecyclerView rvTurnos;
+    private Button reservarTurno;
+    private Reserva turnoSeleccionado;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -155,11 +158,49 @@ public class NuevaReservaFragment extends Fragment {
             }
         });
 
+
+        //turnos
         rvTurnos = view.findViewById(R.id.listadoDeTurnos);
         rvTurnos.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        reservarTurno = view.findViewById(R.id.btnReservarTurno);
+        reservarTurno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                reservar();
+            }
+        });
+
 
         return view;
+    }
+
+    public void reservar(){
+
+        turnoSeleccionado = adapterTurnos.getSelected();
+        Persona fisio = adapterFisio.getSelected();
+        Persona paciente = adapterFisio.getSelected(); /////CAMBIAR/////
+        String fecha = tvFecha.getText().toString().replace("/", "");
+
+        try {
+            if (turnoSeleccionado != null && !fecha.equals("")) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.accumulate("fechaCadena", fecha);
+                jsonObject.accumulate("horaInicioCadena", turnoSeleccionado.getHoraInicioCadena());
+                jsonObject.accumulate("horaFinCadena", turnoSeleccionado.getHoraFinCadena());
+                jsonObject.accumulate("idEmpleado", "{idPersona:"+ fisio.getIdPersona() + "}" );
+                jsonObject.accumulate("idCliente", "{idPersona:"+ paciente.getIdPersona() + "}");
+
+                //post
+                obtenerTurnos(getContext(), fisio.getIdPersona(), fecha);
+
+            } else {
+                Toast.makeText(getContext(), "No se puede reservar turno", Toast.LENGTH_SHORT).show();
+            }
+        }catch (Exception e){
+            Toast.makeText(getContext(), "Error al reservar turno", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
     }
 
 
@@ -186,9 +227,13 @@ public class NuevaReservaFragment extends Fragment {
             @Override
             public void onResponse(Call<Reserva[]> call, Response<Reserva[]> response) {
 
-                turnos = new ArrayList<>(Arrays.asList(response.body()));
-                adapterTurnos= new SingleAdapterTurnos(context, turnos);
-                rvTurnos.setAdapter(adapterTurnos);
+                try {
+                    turnos = new ArrayList<>(Arrays.asList(response.body()));
+                    adapterTurnos = new SingleAdapterTurnos(context, turnos);
+                    rvTurnos.setAdapter(adapterTurnos);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
 
             }
 
@@ -209,9 +254,13 @@ public class NuevaReservaFragment extends Fragment {
             @Override
             public void onResponse(Call<Datos<Persona>> call, Response<Datos<Persona>> response) {
 
-                fisioterapeutas = new ArrayList<>(Arrays.asList(response.body().getLista()));
-                adapterFisio = new SingleAdapterPersona(context, fisioterapeutas);
-                rvFisio.setAdapter(adapterFisio);
+                try{
+                    fisioterapeutas = new ArrayList<>(Arrays.asList(response.body().getLista()));
+                    adapterFisio = new SingleAdapterPersona(context, fisioterapeutas);
+                    rvFisio.setAdapter(adapterFisio);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
 
             }
 
