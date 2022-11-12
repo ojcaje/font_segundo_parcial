@@ -81,17 +81,16 @@
                 android:layout_marginBottom="12sp"
                 android:text="Fisioterapeuta:" />
 
-            <android.widget.SearchView
-                android:id="@+id/fisioterapeutaFiltradoReservas"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:visibility="visible" />
+                android:layout_height="match_parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/listadoFisioterapeutasReservas"
-                android:layout_width="match_parent"
-                android:layout_height="115dp"
-                android:layout_marginTop="12sp" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fisioterapeutaFiltradoReservas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Buscar..." />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/textView9"
@@ -102,17 +101,16 @@
                 android:layout_weight="1"
                 android:text="Paciente:" />
 
-            <android.widget.SearchView
-                android:id="@+id/pacienteFiltradoReservas"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:visibility="visible" />
+                android:layout_height="match_parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/listadoPacientesReservas"
-                android:layout_width="match_parent"
-                android:layout_height="115dp"
-                android:layout_marginTop="12sp" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/pacienteFiltradoReservas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Buscar..." />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TableRow
                 android:layout_width="match_parent"

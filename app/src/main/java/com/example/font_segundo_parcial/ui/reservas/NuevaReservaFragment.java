@@ -1,4 +1,4 @@
-package com.example.font_segundo_parcial;
+package com.example.font_segundo_parcial.ui.reservas;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -6,10 +6,8 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,21 +18,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.font_segundo_parcial.R;
 import com.example.font_segundo_parcial.api.Datos;
 import com.example.font_segundo_parcial.api.Persona;
 import com.example.font_segundo_parcial.api.Reserva;
 import com.example.font_segundo_parcial.api.RetrofitUtil;
-import com.example.font_segundo_parcial.api.SingleAdapterPersona;
 import com.example.font_segundo_parcial.api.SingleAdapterTurnos;
 import com.example.font_segundo_parcial.ui.persona.PersonaPickerActivity;
 import com.google.android.material.textfield.TextInputEditText;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
