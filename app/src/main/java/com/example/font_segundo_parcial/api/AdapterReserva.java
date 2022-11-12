@@ -41,25 +41,13 @@ public class AdapterReserva extends RecyclerView.Adapter<AdapterReserva.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        try {
-            holder.tvPaciente.setText(
-                    (new JSONObject((listaReservas.get(position).getIdCliente()
-                            .toString().replaceAll(" +",""))))
-                            .get("nombreCompleto").toString()
-            );
 
-            holder.tvFisioterapeuta.setText(
-                    (new JSONObject((listaReservas.get(position).getIdEmpleado()
-                            .toString().replaceAll(" +",""))))
-                            .get("nombreCompleto").toString()
-            );
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        holder.tvPaciente.setText(listaReservas.get(position).getIdCliente().getNombreCompleto());
+        holder.tvFisioterapeuta.setText(listaReservas.get(position).getIdEmpleado().getNombreCompleto());
         holder.tvObservacion.setText(listaReservas.get(position).getObservacion());
         holder.tvFecha.setText(listaReservas.get(position).getFecha());
         holder.tvAsistencia.setText(listaReservas.get(position).getFlagAsistio());
-        holder.tvHorario.setText( listaReservas.get(position).getHoraFinCadena() +" - "+ listaReservas.get(position).getHoraInicioCadena() );
+        holder.tvHorario.setText( listaReservas.get(position).getHoraInicioCadena() +" - "+ listaReservas.get(position).getHoraFinCadena());
     }
 
     @Override

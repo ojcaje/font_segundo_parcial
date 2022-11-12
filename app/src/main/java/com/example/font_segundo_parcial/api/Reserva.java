@@ -34,10 +34,10 @@ public class Reserva {
     private Object idFichaClinica;
     @SerializedName("idCliente")
     @Expose
-    private Object idCliente;
+    private Persona idCliente;
     @SerializedName("idEmpleado")
     @Expose
-    private Object idEmpleado;
+    private Persona idEmpleado;
     @SerializedName("fechaCadena")
     @Expose
     private String fechaCadena;
@@ -127,19 +127,19 @@ public class Reserva {
     }
 
 
-    public Object getIdCliente() {
+    public Persona getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(Object idCliente) {
+    public void setIdCliente(Persona idCliente) {
         this.idCliente = idCliente;
     }
 
-    public Object getIdEmpleado() {
+    public Persona getIdEmpleado() {
         return idEmpleado;
     }
 
-    public void setIdEmpleado(Object idEmpleado) {
+    public void setIdEmpleado(Persona idEmpleado) {
         this.idEmpleado = idEmpleado;
     }
 

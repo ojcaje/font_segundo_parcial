@@ -40,6 +40,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -122,7 +123,24 @@ public class ReservasFragment extends Fragment {
         //listado de reservas
         rvReservas = view.findViewById(R.id.listaReservas);
         rvReservas.setLayoutManager(new LinearLayoutManager(getContext()));
-        obtenerReservas(new JSONObject());
+
+        //traer las reservas correspondientes al dia de hoy
+        //America/Asuncion
+
+        Date newDate = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        String strFecha = format.format(newDate);
+
+        try {
+            JSONObject object = new JSONObject();
+            object.accumulate("fechaDesdeCadena", strFecha);
+            object.accumulate("fechaHastaCadena", strFecha);
+
+            obtenerReservas(object);
+        }catch (Exception e){
+            e.printStackTrace();
+            showToast("Error");
+        }
 
 
         //datepicker
