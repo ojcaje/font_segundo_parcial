@@ -18,6 +18,10 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_slideshow" />
         <item
+            android:id="@+id/nav_personas"
+            android:icon="@android:drawable/ic_menu_myplaces"
+            android:title="Pacientes" />
+        <item
             android:id="@+id/nav_fichas_clinicas"
             android:icon="@drawable/library_books_material_design"
             android:title="Fichas Clínicas" />

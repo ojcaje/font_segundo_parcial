@@ -5,6 +5,7 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/nav_home">
 
+
     <fragment
         android:id="@+id/nav_home"
         android:name="com.example.font_segundo_parcial.ui.home.HomeFragment"
@@ -28,6 +29,13 @@
         android:name="com.example.font_segundo_parcial.ui.fichas_clinicas.FichasClinicasFragment"
         android:label="Fichas Clínicas"
         tools:layout="@layout/fragment_fichas_clinicas" />
+
+    <fragment
+        android:id="@+id/nav_personas"
+        android:name="com.example.font_segundo_parcial.ui.persona.PersonaFragment"
+        android:label="Pacientes"
+        tools:layout="@layout/fragment_personas" />
+
 
     <fragment
         android:id="@+id/nav_reservas"

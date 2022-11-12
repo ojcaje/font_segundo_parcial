@@ -1,9 +1,9 @@
-package com.example.font_segundo_parcial.api;
+package com.example.font_segundo_parcial.api.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Persona extends com.example.font_segundo_parcial.api.models.Persona {
+public class Persona  {
     @SerializedName("idPersona")
     @Expose
     private Integer idPersona;
