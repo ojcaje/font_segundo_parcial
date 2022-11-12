@@ -72,7 +72,7 @@ public class EditarPersonaActivity extends AppCompatActivity {
         callApi.enqueue(new Callback<Persona>() {
             @Override
             public void onResponse(Call<Persona> call, Response<Persona> response) {
-                persona = response.body();
+                persona = (com.example.font_segundo_parcial.api.models.Persona) response.body();
 
                 // cargar los datos de la PERSONA en los campos correspondientes
                 binding.setPersona(persona);

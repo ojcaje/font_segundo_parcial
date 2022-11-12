@@ -40,13 +40,13 @@ public class AdapterPersona extends RecyclerView.Adapter<AdapterPersona.ViewHold
 
         viewHolder.tvNombreyApellido.setText(
             new StringBuilder().append(
-                    dspersona[position].getIdPersona()+" "+dspersona[position].getNombre()+" "+dspersona[position].getApellido())
+                    dspersona[position].getIdPersona()+" - "+dspersona[position].getNombre()+" "+dspersona[position].getApellido())
             );
         viewHolder.tvTelefono.setText(dspersona[position].getTelefono());
         viewHolder.tvEmail.setText(dspersona[position].getEmail());
         viewHolder.tvRucCedula.setText(
                 new StringBuilder().append(
-                        dspersona[position].getCedula()+dspersona[position].getRuc())
+                        dspersona[position].getCedula()+"/"+dspersona[position].getRuc())
         );
         viewHolder.tvTipoPersona.setText(dspersona[position].getTipoPersona());
         viewHolder.tvFechaNacimiento.setText(dspersona[position].getFechaNacimiento());

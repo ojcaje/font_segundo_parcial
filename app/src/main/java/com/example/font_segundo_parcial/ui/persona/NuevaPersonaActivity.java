@@ -30,7 +30,7 @@ public class NuevaPersonaActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editar_persona);
+        setContentView(R.layout.activity_nueva_persona);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Nuevo Paciente");
 
