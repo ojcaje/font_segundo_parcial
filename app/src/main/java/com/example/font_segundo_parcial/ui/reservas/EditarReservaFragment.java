@@ -230,7 +230,7 @@ public class EditarReservaFragment extends Fragment {
 
                 if(response.code() == 200){
                     Toast.makeText(getContext(), "Reserva modificada con éxito", Toast.LENGTH_SHORT).show();
-                    //salir();
+                    salir();
 
                 }
                 else {
@@ -282,7 +282,7 @@ public class EditarReservaFragment extends Fragment {
 
                 if(response.isSuccessful()){
                     Toast.makeText(getContext(), "Reserva cancelada", Toast.LENGTH_SHORT).show();
-                    //salir
+                    salir();
 
                 }
                 else {
