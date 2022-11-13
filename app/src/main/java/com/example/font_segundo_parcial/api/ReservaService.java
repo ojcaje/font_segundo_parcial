@@ -59,11 +59,11 @@ public interface ReservaService {
 
 
     @Headers({
-            "Accept: application/json",
+            "Accept: application/json; charset=utf-8",
             "usuario: usuario5"
     })
     @PUT("reserva")
-    Call<Void> actualizarReserva(@Body JSONObject reserva);
+    Call<Void> actualizarReserva(@Body ObservacionReserva reserva);
 
     @Headers({
             "Accept: application/json"

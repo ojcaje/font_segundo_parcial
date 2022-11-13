@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.font_segundo_parcial.R;
 import com.example.font_segundo_parcial.api.Datos;
+import com.example.font_segundo_parcial.api.ObservacionReserva;
 import com.example.font_segundo_parcial.api.Persona;
 import com.example.font_segundo_parcial.api.Reserva;
 import com.example.font_segundo_parcial.api.RetrofitUtil;
@@ -162,6 +163,7 @@ public class EditarReservaFragment extends Fragment {
             tvPaciente.setText(reserva.getIdCliente().getNombreCompleto());
             tvFecha.setText(reserva.getFecha());
             tvHorario.setText(reserva.getHoraInicioCadena() + " - "+ reserva.getHoraFinCadena());
+            tvEstado.setText(reserva.getFlagEstado());
 
             if(reserva.getFlagAsistio()!= null){
 
@@ -192,25 +194,26 @@ public class EditarReservaFragment extends Fragment {
     }
 
     public void salir(){
-        getFragmentManager().popBackStackImmediate();
+        //getFragmentManager().popBackStackImmediate();
+        getFragmentManager().popBackStack();
     }
 
     public void guardar(){
 
         try {
 
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.accumulate("idReserva", reserva.getIdReserva());
-            jsonObject.accumulate("observacion", obs.getText());
+            ObservacionReserva observacionReserva = new ObservacionReserva();
+            observacionReserva.setIdReserva(reserva.getIdReserva());
+            observacionReserva.setObservacion(obs.getText().toString());
 
             if( asistio.isChecked()) {
-                jsonObject.accumulate("flagAsistio", "S");
+                observacionReserva.setFlagAsistio("S");
             }else if (noAsistio.isChecked()){
-                jsonObject.accumulate("flagAsistio", "N");
+                observacionReserva.setFlagAsistio("N");
             }
 
             //put
-            putReserva(jsonObject);
+            putReserva(observacionReserva);
 
         }catch (Exception e){
             Toast.makeText(getContext(), "Error al reservar turno", Toast.LENGTH_SHORT).show();
@@ -218,7 +221,7 @@ public class EditarReservaFragment extends Fragment {
         }
     }
 
-    public void putReserva(JSONObject r){
+    public void putReserva(ObservacionReserva r){
         Call<Void> callApi = RetrofitUtil.getReservaService().actualizarReserva(r);
 
         callApi.enqueue(new Callback<Void>() {
@@ -244,18 +247,6 @@ public class EditarReservaFragment extends Fragment {
             }
         });
     }
-
-    /*public void putReserva(JSONObject r){
-        Completable callApi = (Completable) RetrofitUtil.getReservaService().actualizarReserva(r)
-                .subscribe(()->{
-                    Toast.makeText(getContext(), "Reserva modificada con éxito", Toast.LENGTH_SHORT).show();
-                }, exception->{
-                    Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
-
-                });
-    }*/
-
-
 
 
     public void getReserva(Context context, int idReserva) {
@@ -290,7 +281,7 @@ public class EditarReservaFragment extends Fragment {
             public void onResponse(Call<Reserva> call, Response<Reserva> response) {
 
                 if(response.isSuccessful()){
-                    Toast.makeText(getContext(), "Reserva eliminada con éxito", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Reserva cancelada", Toast.LENGTH_SHORT).show();
                     //salir
 
                 }
