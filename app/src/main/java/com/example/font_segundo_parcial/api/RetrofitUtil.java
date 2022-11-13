@@ -54,4 +54,8 @@ public class RetrofitUtil {
     public static PersonaService getPersonaService(){
         return RetrofitUtil.getClient(URL_BASE).create(PersonaService.class);
     }
+
+    public static com.example.font_segundo_parcial.api.services.PersonaService getUsuarioService(){
+        return RetrofitUtil.getClient(URL_BASE).create(com.example.font_segundo_parcial.api.services.PersonaService.class);
+    }
 }
