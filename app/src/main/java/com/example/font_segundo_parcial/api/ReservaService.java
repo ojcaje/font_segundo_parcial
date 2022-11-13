@@ -4,6 +4,7 @@ import com.example.font_segundo_parcial.api.models.FichaClinica;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -45,4 +46,31 @@ public interface ReservaService {
     })
     @GET("persona/{id}/agenda")
     Call<Reserva[]> getTurnos(@Path("id") int id,  @Query("fecha") String fecha, @Query("disponible") String disponible);
+
+
+    @Headers({
+            "Accept: application/json"
+    })
+    @GET("reserva/{id}")
+    Call<Reserva> getReserva(@Path("id") int id);
+
+
+    @Headers({
+            "Accept: application/json",
+            "usuario: usuario5"
+    })
+    @PUT("reserva")
+    Call<JSONObject> actualizarReserva(@Body JSONObject reserva);
+
+
+    @Headers({
+            "Accept: application/json"
+    })
+    @DELETE("reserva/{id}")
+    Call<Reserva> deleteReserva(@Path("id") int id);
+
+
+
+
+
 }

@@ -1,12 +1,19 @@
 package com.example.font_segundo_parcial.api;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.font_segundo_parcial.R;
+import com.example.font_segundo_parcial.ui.reservas.EditarReservaFragment;
+import com.example.font_segundo_parcial.ui.reservas.NuevaReservaFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,6 +24,8 @@ import java.util.List;
 
 public class AdapterReserva extends RecyclerView.Adapter<AdapterReserva.ViewHolder>{
 
+    //public FragmentTransaction transaction; //
+    public FragmentManager fragmentManager;
     private List<Reserva> listaReservas;
 
     public AdapterReserva(List<Reserva> listaReservas) {
@@ -30,6 +39,11 @@ public class AdapterReserva extends RecyclerView.Adapter<AdapterReserva.ViewHold
     public void setListaReservas(List<Reserva> listaReservas) {
         this.listaReservas = listaReservas;
     }
+
+    public void setFragmentTransaction(FragmentManager f){
+        this.fragmentManager = f;
+    }
+
 
     @NonNull
     @Override
@@ -48,6 +62,27 @@ public class AdapterReserva extends RecyclerView.Adapter<AdapterReserva.ViewHold
         holder.tvFecha.setText(listaReservas.get(position).getFecha());
         holder.tvAsistencia.setText(listaReservas.get(position).getFlagAsistio());
         holder.tvHorario.setText( listaReservas.get(position).getHoraInicioCadena() +" - "+ listaReservas.get(position).getHoraFinCadena());
+        holder.tvEstado.setText(listaReservas.get(position).getFlagEstado());
+        holder.btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(fragmentManager!= null) {
+                    //String id = Integer.toString(listaReservas.get(holder.getAdapterPosition()).getIdReserva());
+                    int id = listaReservas.get(holder.getAdapterPosition()).getIdReserva();
+                    Fragment newFragment = new EditarReservaFragment();
+
+                    Bundle args = new Bundle();
+                    args.putInt("idReserva", id);
+                    newFragment.setArguments(args);
+                    //FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.frag_reservas, newFragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                }
+            }
+        });
     }
 
     @Override
@@ -65,6 +100,8 @@ public class AdapterReserva extends RecyclerView.Adapter<AdapterReserva.ViewHold
         TextView tvPaciente;
         TextView tvAsistencia;
         TextView tvObservacion;
+        Button btnEditar;
+        TextView tvEstado;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
@@ -74,6 +111,8 @@ public class AdapterReserva extends RecyclerView.Adapter<AdapterReserva.ViewHold
             tvPaciente = itemView.findViewById(R.id.pacienteReservaItem);
             tvAsistencia = itemView.findViewById(R.id.asistenciaReservaItem);
             tvObservacion = itemView.findViewById(R.id.observacionReservaItem);
+            btnEditar = itemView.findViewById(R.id.btnEditarReserva);
+            tvEstado= itemView.findViewById(R.id.EstadoReservaItem);
 
 
 

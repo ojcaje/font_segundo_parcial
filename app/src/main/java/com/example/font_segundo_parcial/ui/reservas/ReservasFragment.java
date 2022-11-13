@@ -283,6 +283,7 @@ public class ReservasFragment extends Fragment {
 
                 reservas = new ArrayList<>(Arrays.asList(response.body().getLista()));
                 adapterReserva = new AdapterReserva(reservas);
+                adapterReserva.fragmentManager = getFragmentManager();
                 rvReservas.setAdapter(adapterReserva);
 
             }
