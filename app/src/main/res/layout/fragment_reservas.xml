@@ -29,9 +29,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:text="Reservas - Listado"
+                android:textAlignment="center"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                tools:textAlignment="center" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -154,7 +154,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12sp"
-                android:paddingTop="10sp" />
+                android:layout_marginBottom="14sp"
+                tools:layout_marginBottom="12sp" />
 
         </LinearLayout>
     </ScrollView>

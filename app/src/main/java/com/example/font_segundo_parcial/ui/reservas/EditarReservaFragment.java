@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -134,13 +135,13 @@ public class EditarReservaFragment extends Fragment {
         });
 
         //salir
-        salir = view.findViewById(R.id.btnSalirEditReserva);
+        /*salir = view.findViewById(R.id.btnSalirEditReserva);
         salir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 salir();
             }
-        });
+        });*/
 
         tvFisio = view.findViewById(R.id.nombreFisioEditReserva);
         tvPaciente = view.findViewById(R.id.nombrePacienteEditReserva);
@@ -152,6 +153,20 @@ public class EditarReservaFragment extends Fragment {
         tvEstado= view.findViewById(R.id.estadoEditReserva);
 
         getReserva(getContext(), idReserva);
+
+        //para que ir al fragmento anterior (reservas) y no al activity
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                    getFragmentManager().popBackStack();
+                    return true;
+                }
+                return false;
+            }
+        });
 
 
         return view;
@@ -287,7 +302,7 @@ public class EditarReservaFragment extends Fragment {
                 }
                 else {
                     Log.e("s", "Error al hacer post");
-                    Toast.makeText(getContext(), "No se pudo eliminar la reserva", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "No se pudo cancelar la reserva", Toast.LENGTH_SHORT).show();
                 }
 
             }

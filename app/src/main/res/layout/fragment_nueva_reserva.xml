@@ -30,9 +30,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:text="Nueva Reserva"
+                android:textAlignment="center"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                tools:textAlignment="center" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView3"
