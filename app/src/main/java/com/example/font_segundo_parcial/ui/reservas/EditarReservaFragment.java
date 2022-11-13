@@ -274,11 +274,11 @@ public class EditarReservaFragment extends Fragment {
     }
 
     public void deleteReserva(int id){
-        Call<Reserva> callApi = RetrofitUtil.getReservaService()
+        Call<Void> callApi = RetrofitUtil.getReservaService()
                 .deleteReserva(id);
-        callApi.enqueue(new Callback<Reserva>() {
+        callApi.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<Reserva> call, Response<Reserva> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
 
                 if(response.isSuccessful()){
                     Toast.makeText(getContext(), "Reserva cancelada", Toast.LENGTH_SHORT).show();
@@ -293,7 +293,7 @@ public class EditarReservaFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<Reserva> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
                 Log.e("s", t.toString());
             }
         });

@@ -69,7 +69,7 @@ public interface ReservaService {
             "Accept: application/json"
     })
     @DELETE("reserva/{id}")
-    Call<Reserva> deleteReserva(@Path("id") int id);
+    Call<Void> deleteReserva(@Path("id") int id);
 
 
 
