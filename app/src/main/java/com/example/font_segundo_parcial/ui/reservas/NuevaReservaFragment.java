@@ -215,8 +215,10 @@ public class NuevaReservaFragment extends Fragment {
     private void filtrado(){
 
         String fecha = tvFecha.getText().toString();
-        int idFisio;
-        idFisio = fisio.getIdPersona();
+        int idFisio=0;
+        if(fisio !=null){
+            idFisio = fisio.getIdPersona();
+        }
 
         if(!fecha.equals("") && idFisio!=0) {
             obtenerTurnos(getContext(), idFisio, fecha.replace("/", ""));

@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -218,15 +219,15 @@ public class EditarReservaFragment extends Fragment {
     }
 
     public void putReserva(JSONObject r){
-        Call<JSONObject> callApi = RetrofitUtil.getReservaService()
-                .actualizarReserva(r);
-        callApi.enqueue(new Callback<JSONObject>() {
-            @Override
-            public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
+        Call<Void> callApi = RetrofitUtil.getReservaService().actualizarReserva(r);
 
-                if(response.isSuccessful()){
+        callApi.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+                if(response.code() == 200){
                     Toast.makeText(getContext(), "Reserva modificada con éxito", Toast.LENGTH_SHORT).show();
-                    //salir
+                    //salir();
 
                 }
                 else {
@@ -237,11 +238,22 @@ public class EditarReservaFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<JSONObject> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
                 Log.e("s", t.toString());
+                t.printStackTrace();
             }
         });
     }
+
+    /*public void putReserva(JSONObject r){
+        Completable callApi = (Completable) RetrofitUtil.getReservaService().actualizarReserva(r)
+                .subscribe(()->{
+                    Toast.makeText(getContext(), "Reserva modificada con éxito", Toast.LENGTH_SHORT).show();
+                }, exception->{
+                    Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
+
+                });
+    }*/
 
 
 

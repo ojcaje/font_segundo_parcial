@@ -1,7 +1,10 @@
 package com.example.font_segundo_parcial.api;
 
 import com.example.font_segundo_parcial.api.models.FichaClinica;
+import com.google.gson.JsonElement;
 
+import io.reactivex.Completable;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -32,12 +35,12 @@ public interface ReservaService {
     Call<Datos<Reserva>> agregarReserva(@Body Reserva reserva);
 
 
-    @Headers({
+    /*@Headers({
             "Accept: application/json",
             "usuario: usuario5"
     })
     @PUT("reserva")
-    Call<Reserva> actualizarReserva(@Body Reserva reserva);
+    Call<Reserva> actualizarReserva(@Body Reserva reserva);*/
 
 
     ///persona/4/agenda?fecha=20190903&disponible=S
@@ -60,8 +63,7 @@ public interface ReservaService {
             "usuario: usuario5"
     })
     @PUT("reserva")
-    Call<JSONObject> actualizarReserva(@Body JSONObject reserva);
-
+    Call<Void> actualizarReserva(@Body JSONObject reserva);
 
     @Headers({
             "Accept: application/json"
