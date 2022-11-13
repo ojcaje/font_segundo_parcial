@@ -40,7 +40,7 @@
 
             <fragment
                 android:id="@+id/activityeditarPersonaFragment"
-                android:name="com.example.font_segundo_parcial.ui.fichas_clinicas.EditarFichaClinicaFragment"
+                android:name="com.example.font_segundo_parcial.ui.persona.EditarPersonaFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"

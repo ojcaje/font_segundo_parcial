@@ -98,8 +98,8 @@ public class AdapterPersona extends RecyclerView.Adapter<AdapterPersona.ViewHold
             tvRucCedula=v.findViewById(R.id.txtRucCedula);
             tvTipoPersona=v.findViewById(R.id.txtTipoPersona);
             tvFechaNacimiento=v.findViewById(R.id.txtFechaNacimiento);
-            btnEditar=v.findViewById(R.id.btnEditar);
-            btnEliminar=v.findViewById(R.id.btnEliminar);
+            btnEditar=v.findViewById(R.id.btnEditarPersona);
+            btnEliminar=v.findViewById(R.id.btnEliminarPersona);
         }
     }
 

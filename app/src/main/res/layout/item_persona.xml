@@ -78,7 +78,7 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/btnEditar"
+                android:id="@+id/btnEditarPersona"
                 android:layout_width="110sp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10sp"
@@ -87,12 +87,11 @@
                 android:text="Editar" />
 
             <Button
-                android:id="@+id/btnEliminar"
+                android:id="@+id/btnEliminarPersona"
                 android:layout_width="110sp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10sp"
                 android:layout_marginEnd="10sp"
-                android:background="#960000"
                 android:maxWidth="110sp"
                 android:text="Eliminar" />
 

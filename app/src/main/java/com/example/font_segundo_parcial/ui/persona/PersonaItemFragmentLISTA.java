@@ -75,7 +75,7 @@ public class PersonaItemFragmentLISTA extends Fragment {
         View vista = inflater.inflate(R.layout.item_persona, container, false);
 
         // para el botón de eliminar persona
-        vista.findViewById(R.id.btnEliminar).setOnClickListener(new View.OnClickListener() {
+        vista.findViewById(R.id.btnEliminarPersona).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

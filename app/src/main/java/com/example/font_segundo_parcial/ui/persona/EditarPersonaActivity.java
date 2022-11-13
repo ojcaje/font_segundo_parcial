@@ -30,7 +30,7 @@ import retrofit2.Response;
 
 public class EditarPersonaActivity extends AppCompatActivity {
 
-    com.example.font_segundo_parcial.api.models.Persona persona;
+    com.example.font_segundo_parcial.api.Persona persona;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +72,7 @@ public class EditarPersonaActivity extends AppCompatActivity {
         callApi.enqueue(new Callback<Persona>() {
             @Override
             public void onResponse(Call<Persona> call, Response<Persona> response) {
-                persona = (com.example.font_segundo_parcial.api.models.Persona) response.body();
+                persona = response.body();
 
                 // cargar los datos de la PERSONA en los campos correspondientes
                 binding.setPersona(persona);
@@ -93,31 +93,31 @@ public class EditarPersonaActivity extends AppCompatActivity {
             }
         });
 
-        // para el botón de eliminar persona
-        fragmento.findViewById(R.id.btnEliminar).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String eliminar =((TextView) v.findViewById(R.id.txtNombreyApellido)).getText().toString().split(" ")[0];
-
-                // Eliminar del back la PERSONA
-                Toast.makeText(null, "Eliminando paciente...", Toast.LENGTH_SHORT).show();
-                Call<Persona> callApi = RetrofitUtil.getPersonaService()
-                        .deletePersona(Integer.getInteger(eliminar));
-                callApi.enqueue(new Callback<Persona>() {
-                    @Override
-                    public void onResponse(Call<Persona> call, Response<Persona> response) {
-                        Toast.makeText(null, "Paciente eliminado exitosamente...", Toast.LENGTH_SHORT).show();
-
-                    }
-                    @Override
-                    public void onFailure(Call<Persona> call, Throwable t) {
-                        Log.e("PERSONA: ", t.toString());
-                    }
-                });
-
-            }
-        });
+//        // para el botón de eliminar persona
+//        fragmento.findViewById(R.id.btnEliminarPersona).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                String eliminar =((TextView) v.findViewById(R.id.txtNombreyApellido)).getText().toString().split(" ")[0];
+//
+//                // Eliminar del back la PERSONA
+//                Toast.makeText(null, "Eliminando paciente...", Toast.LENGTH_SHORT).show();
+//                Call<Persona> callApi = RetrofitUtil.getPersonaService()
+//                        .deletePersona(Integer.getInteger(eliminar));
+//                callApi.enqueue(new Callback<Persona>() {
+//                    @Override
+//                    public void onResponse(Call<Persona> call, Response<Persona> response) {
+//                        Toast.makeText(null, "Paciente eliminado exitosamente...", Toast.LENGTH_SHORT).show();
+//
+//                    }
+//                    @Override
+//                    public void onFailure(Call<Persona> call, Throwable t) {
+//                        Log.e("PERSONA: ", t.toString());
+//                    }
+//                });
+//
+//            }
+//        });
 
 
         // para hacer el post en caso de querer guardar
