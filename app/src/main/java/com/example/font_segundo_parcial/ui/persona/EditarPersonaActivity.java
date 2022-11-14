@@ -45,17 +45,17 @@ public class EditarPersonaActivity extends AppCompatActivity {
 
         // deshabilitar los campos que no se pueden editar en este caso
         View fragmento = findViewById(R.id.activityeditarPersonaFragment);
-        fragmento.findViewById(R.id.inputNombreNuevaPersona).setFocusable(false);
-        fragmento.findViewById(R.id.inputApellidoNuevaPersona).setFocusable(false);
-        fragmento.findViewById(R.id.inputTelefonoNuevaPersona).setFocusable(false);
-        fragmento.findViewById(R.id.inputEmailNuevaPersona).setFocusable(false);
-        fragmento.findViewById(R.id.inputRucNuevaPersona).setFocusable(false);
-        fragmento.findViewById(R.id.inputCedulaNuevaPersona).setFocusable(false);
-
-        fragmento.findViewById(R.id.text_TipoPersonaNuevaPersona).setVisibility(View.GONE);
-        fragmento.findViewById(R.id.spinnerTipoPersonaNuevaPersona).setFocusable(false);
-
-        fragmento.findViewById(R.id.inputfechaNacimientoNuevaPersona).setFocusable(false);
+//        fragmento.findViewById(R.id.inputNombreNuevaPersona).setFocusable(false);
+//        fragmento.findViewById(R.id.inputApellidoNuevaPersona).setFocusable(false);
+//        fragmento.findViewById(R.id.inputTelefonoNuevaPersona).setFocusable(false);
+//        fragmento.findViewById(R.id.inputEmailNuevaPersona).setFocusable(false);
+//        fragmento.findViewById(R.id.inputRucNuevaPersona).setFocusable(false);
+//        fragmento.findViewById(R.id.inputCedulaNuevaPersona).setFocusable(false);
+//
+//        fragmento.findViewById(R.id.text_TipoPersonaNuevaPersona).setVisibility(View.GONE);
+//        fragmento.findViewById(R.id.spinnerTipoPersonaNuevaPersona).setFocusable(false);
+//
+//        fragmento.findViewById(R.id.inputfechaNacimientoNuevaPersona).setFocusable(false);
 
         // cambiar nombre
         ((TextView)fragmento.findViewById(R.id.textoTitulo)).setText("Editar Paciente");
@@ -93,33 +93,6 @@ public class EditarPersonaActivity extends AppCompatActivity {
             }
         });
 
-//        // para el botón de eliminar persona
-//        fragmento.findViewById(R.id.btnEliminarPersona).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                String eliminar =((TextView) v.findViewById(R.id.txtNombreyApellido)).getText().toString().split(" ")[0];
-//
-//                // Eliminar del back la PERSONA
-//                Toast.makeText(null, "Eliminando paciente...", Toast.LENGTH_SHORT).show();
-//                Call<Persona> callApi = RetrofitUtil.getPersonaService()
-//                        .deletePersona(Integer.getInteger(eliminar));
-//                callApi.enqueue(new Callback<Persona>() {
-//                    @Override
-//                    public void onResponse(Call<Persona> call, Response<Persona> response) {
-//                        Toast.makeText(null, "Paciente eliminado exitosamente...", Toast.LENGTH_SHORT).show();
-//
-//                    }
-//                    @Override
-//                    public void onFailure(Call<Persona> call, Throwable t) {
-//                        Log.e("PERSONA: ", t.toString());
-//                    }
-//                });
-//
-//            }
-//        });
-
-
         // para hacer el post en caso de querer guardar
         fragmento.findViewById(R.id.btnGuardarNuevaPersona).setOnClickListener(
                 new View.OnClickListener() {
@@ -148,11 +121,11 @@ public class EditarPersonaActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        Call<Persona> callApi= RetrofitUtil.getPersonaService()
+                        Call<Void> callApi= RetrofitUtil.getPersonaService()
                                 .putPersona(personaActualizada);
-                        callApi.enqueue(new Callback<Persona>() {
+                        callApi.enqueue(new Callback<Void>() {
                             @Override
-                            public void onResponse(Call<Persona> call, Response<Persona> response) {
+                            public void onResponse(Call<Void> call, Response<Void> response) {
                                 if(response.isSuccessful()){
                                     Toast.makeText(estaActividad, "Éxito al guardar cambios", Toast.LENGTH_LONG).show();
                                     estaActividad.finish();
@@ -164,7 +137,7 @@ public class EditarPersonaActivity extends AppCompatActivity {
                             }
 
                             @Override
-                            public void onFailure(Call<Persona> call, Throwable t) {
+                            public void onFailure(Call<Void> call, Throwable t) {
                                 Log.e("PERSONA: ", t.toString());
                             }
                         });

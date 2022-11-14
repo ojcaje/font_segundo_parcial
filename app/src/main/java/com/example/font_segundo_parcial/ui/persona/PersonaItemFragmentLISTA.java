@@ -74,33 +74,6 @@ public class PersonaItemFragmentLISTA extends Fragment {
         // Inflate the layout for this fragment
         View vista = inflater.inflate(R.layout.item_persona, container, false);
 
-        // para el botón de eliminar persona
-        vista.findViewById(R.id.btnEliminarPersona).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String eliminar =((TextView) getActivity()
-                        .findViewById(R.id.txtNombreyApellido)).getText().toString().split(" ")[0];
-
-                // Eliminar del back la PERSONA
-                Toast.makeText(null, "Eliminando paciente...", Toast.LENGTH_SHORT).show();
-                Call<Persona> callApi = RetrofitUtil.getPersonaService()
-                        .deletePersona(Integer.getInteger(eliminar));
-                callApi.enqueue(new Callback<Persona>() {
-                    @Override
-                    public void onResponse(Call<Persona> call, Response<Persona> response) {
-                        Toast.makeText(null, "Paciente eliminado exitosamente...", Toast.LENGTH_SHORT).show();
-
-                    }
-                    @Override
-                    public void onFailure(Call<Persona> call, Throwable t) {
-                        Log.e("PERSONA: ", t.toString());
-                    }
-                });
-
-            }
-        });
-
         return vista;
     }
 }

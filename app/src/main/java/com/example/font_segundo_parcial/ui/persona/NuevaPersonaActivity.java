@@ -4,6 +4,9 @@ package com.example.font_segundo_parcial.ui.persona;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,6 +37,19 @@ public class NuevaPersonaActivity
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Nuevo Paciente");
 
+
+        // para rellenar los spinners
+        View fragmento = findViewById(R.id.editarPersonaFragment);
+        NuevaPersonaActivity estaActividad = this;
+
+        String vector [] ={"FISICA","JURIDICA"};
+        ArrayAdapter<String> aaTipoPersona = new ArrayAdapter<>(estaActividad, android.R.layout.simple_spinner_item, vector);
+
+        aaTipoPersona.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        ((Spinner)fragmento.findViewById(R.id.spinnerTipoPersonaNuevaPersona))
+                .setAdapter(aaTipoPersona);
+
     }
 
     // this event will enable the back
@@ -50,10 +66,11 @@ public class NuevaPersonaActivity
 
     // al recibir los datos de la persona, hacemos post
     @Override
-    public void datosPersona(String nombre, String apellido, String telefono, String email, String ruc, String cedula, String tipoPersona, String fechaNacimiento) {
+    public void datosPersona(String nombre, String apellido,
+                                         String telefono, String email, String ruc, String cedula,
+                                         String tipoPersona, String fechaNacimiento){
 
-
-        // crear la nueva ficha
+        // crear la nueva persona
         Persona persona = new Persona();
         persona.setNombre(nombre);
         persona.setApellido(apellido);
@@ -63,19 +80,9 @@ public class NuevaPersonaActivity
         persona.setTipoPersona(tipoPersona);
         persona.setEmail(email);
 
-        try {
-            // convertir string a fecha
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-            Date datofecha = sdf.parse(fechaNacimiento);
+        fechaNacimiento = fechaNacimiento.replace("/","-").concat(" 00:00:00");
+        persona.setFechaNacimiento(fechaNacimiento);
 
-            SimpleDateFormat sdfTIME = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-            // convertir fecha a string
-            String fecha = sdf.format(datofecha);
-            persona.setFechaNacimiento(fecha);
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
         NuevaPersonaActivity estaActividad = this;
 

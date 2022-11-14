@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -82,11 +83,10 @@ public class PersonaFragment extends Fragment {
         getActivity().findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getActivity(), NuevaPersonaActivity.class);
+                Intent i = new Intent(getActivity(), NuevaPersonaActivity.class);
                 startActivity(i);
             }
         });
-
     }
 
     @Override
@@ -104,7 +104,35 @@ public class PersonaFragment extends Fragment {
         // establecer onClickListener para el botón de filtrar personas
         filtrarPersonasOnClickListener(vista);
 
-        // Inflate the layout for this fragment
+
+//        // para el botón de eliminar persona
+//        vista.findViewById(R.id.listaPersonas).findViewById(R.id.cardPersona).findViewById(R.id.btnEliminarPersona).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                String eliminar =((TextView) getActivity()
+//                        .findViewById(R.id.txtNombreyApellido)).getText().toString().split(" ")[0];
+//
+//                // Eliminar del back la PERSONA
+//                Toast.makeText(null, "Eliminando paciente...", Toast.LENGTH_SHORT).show();
+//                Call<Persona> callApi = RetrofitUtil.getPersonaService()
+//                        .deletePersona(Integer.getInteger(eliminar));
+//                callApi.enqueue(new Callback<Persona>() {
+//                    @Override
+//                    public void onResponse(Call<Persona> call, Response<Persona> response) {
+//                        Toast.makeText(null, "Paciente eliminado exitosamente...", Toast.LENGTH_SHORT).show();
+//
+//                    }
+//                    @Override
+//                    public void onFailure(Call<Persona> call, Throwable t) {
+//                        Log.e("PERSONA: ", t.toString());
+//                    }
+//                });
+//
+//            }
+//        });
+
+    // Inflate the layout for this fragment
         return vista;
     }
 
@@ -184,11 +212,11 @@ public class PersonaFragment extends Fragment {
         try {
 
             if (!textoInputNombre.equals("")){
-                filtro.accumulate("idCliente", textoInputNombre);
+                filtro.accumulate("nombre", textoInputNombre);
             }
 
             if (!textoInputApellido.equals("")){
-                filtro.accumulate("idEmpleado", textoInputApellido);
+                filtro.accumulate("apellido", textoInputApellido);
             }
 
         } catch (JSONException e) {

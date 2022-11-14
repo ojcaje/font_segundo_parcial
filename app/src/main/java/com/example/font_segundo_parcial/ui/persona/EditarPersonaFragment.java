@@ -41,6 +41,7 @@ import retrofit2.Response;
 public class EditarPersonaFragment extends Fragment {
 
     String vector [] ={"FISICA","JURIDICA"};
+    private TextView fechaNacimiento;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -90,7 +91,16 @@ public class EditarPersonaFragment extends Fragment {
         // Inflate the layout for this fragment
         View vista = inflater.inflate(R.layout.fragment_editar_persona, container, false);
 
-        setOnClickSpinnerTipoPersona(vista);
+        //datepicker
+        fechaNacimiento = vista.findViewById(R.id.inputfechaNacimientoNuevaPersona);
+        fechaNacimiento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDatePicker(fechaNacimiento);
+            }
+        });
+
+        //setOnClickSpinnerTipoPersona(vista);
 
         // para el botón de cancelar
         vista.findViewById(R.id.btnCancelarNuevaPersona).setOnClickListener(new View.OnClickListener() {
@@ -129,11 +139,12 @@ public class EditarPersonaFragment extends Fragment {
                         nombre,
                         apellido,
                         telefono,
-                        cedula,
+                        email,
                         ruc,
+                        cedula,
                         tipoPersona,
-                        fechaNacimiento,
-                        email
+                        fechaNacimiento
+
                 );
             }
         });
@@ -148,7 +159,7 @@ public class EditarPersonaFragment extends Fragment {
 
         // para rellenar el spinner sólo cuando se cliquea en él
         ((TextView) vista
-                .findViewById(R.id.text_TipoPersonaNuevaPersona)).setOnClickListener(
+                .findViewById(R.id.textViewSpinnerTipoPersonaNuevaPersona)).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -163,7 +174,7 @@ public class EditarPersonaFragment extends Fragment {
      * Para cargar los datos en el spinner de Tipo Persona
      */
     private void rellenarSpinnerTipoPersona(){
-        ArrayAdapter aaTipoPersona = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item,
+        ArrayAdapter<String> aaTipoPersona = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item,
                 vector);
         aaTipoPersona.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 

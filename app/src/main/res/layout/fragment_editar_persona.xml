@@ -18,169 +18,202 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/textoTitulo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="Editar Paciente"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout4"
-                android:layout_width="293dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textoTitulo">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputNombreNuevaPersona"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Nombre:"
-                    android:text="@={persona.nombre}" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout5"
-                android:layout_width="293dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:layout_constraintStart_toStartOf="@+id/textInputLayout4"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputApellidoNuevaPersona"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Apellido:"
-                    android:text="@={persona.apellido}" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout6"
-                android:layout_width="293dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:layout_constraintStart_toStartOf="@+id/textInputLayout5"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout5">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputTelefonoNuevaPersona"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Teléfono:"
-                    android:text="@={persona.telefono}" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout7"
-                android:layout_width="293dp"
-                android:layout_height="wrap_content"
-                tools:layout_editor_absoluteX="5dp"
-                android:layout_marginTop="20dp"
-                app:layout_constraintStart_toStartOf="@+id/textInputLayout6"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout6">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputEmailNuevaPersona"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Email:"
-                    android:text="@={persona.email}" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout8"
-                android:layout_width="293dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:layout_constraintStart_toStartOf="@+id/textInputLayout7"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout7">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputRucNuevaPersona"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="RUC:"
-                    android:text="@={persona.ruc}" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout9"
-                android:layout_width="293dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:layout_constraintStart_toStartOf="@+id/textInputLayout8"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout8">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputCedulaNuevaPersona"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Cédula:"
-                    android:text="@={persona.cedula}" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:id="@+id/text_TipoPersonaNuevaPersona"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Tipo Persona:"
-                android:textSize="17sp"
-                app:layout_constraintStart_toStartOf="@+id/textInputLayout9"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout9" />
-            <Spinner
-                android:id="@+id/spinnerTipoPersonaNuevaPersona"
-                android:layout_width="220dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:layout_constraintEnd_toEndOf="@+id/text_TipoPersonaNuevaPersona"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/text_TipoPersonaNuevaPersona"
-                app:layout_constraintTop_toBottomOf="@+id/text_TipoPersonaNuevaPersona" />
-
-            <TextView
-                android:id="@+id/textViewfechaNacimientoNuevaPersona"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Fecha de Nacimiento:"
-                android:textSize="17sp"
-                app:layout_constraintEnd_toEndOf="@+id/spinnerTipoPersonaNuevaPersona"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/spinnerTipoPersonaNuevaPersona"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerTipoPersonaNuevaPersona" />
-            <EditText
-                android:id="@+id/inputfechaNacimientoNuevaPersona"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:ems="10"
-                android:hint="yyyy/mm/dd"
-                android:inputType="date"
-                app:layout_constraintEnd_toEndOf="@+id/textViewfechaNacimientoNuevaPersona"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textViewfechaNacimientoNuevaPersona"
-                app:layout_constraintTop_toBottomOf="@+id/textViewfechaNacimientoNuevaPersona" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/textoTitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="Nuevo Paciente"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/btnGuardarNuevaPersona"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Guardar"
-                app:layout_constraintStart_toStartOf="@+id/inputfechaNacimientoNuevaPersona"
-                app:layout_constraintTop_toBottomOf="@+id/inputfechaNacimientoNuevaPersona" />
-            <Button
-                android:id="@+id/btnCancelarNuevaPersona"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:text="Cancelar"
-                app:layout_constraintStart_toEndOf="@+id/btnGuardarNuevaPersona"
-                app:layout_constraintTop_toTopOf="@+id/btnGuardarNuevaPersona" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout4"
+                    android:layout_width="293dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textoTitulo">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputNombreNuevaPersona"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Nombre:"
+                        android:text="@={persona.nombre}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout5"
+                    android:layout_width="293dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="@+id/textInputLayout4"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputApellidoNuevaPersona"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Apellido:"
+                        android:text="@={persona.apellido}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout6"
+                    android:layout_width="293dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="@+id/textInputLayout5"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout5">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputTelefonoNuevaPersona"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Teléfono:"
+                        android:text="@={persona.telefono}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout7"
+                    android:layout_width="293dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="@+id/textInputLayout6"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout6"
+                    tools:layout_editor_absoluteX="5dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputEmailNuevaPersona"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Email:"
+                        android:text="@={persona.email}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout8"
+                    android:layout_width="293dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="@+id/textInputLayout7"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout7">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputRucNuevaPersona"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="RUC:"
+                        android:text="@={persona.ruc}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout9"
+                    android:layout_width="293dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="@+id/textInputLayout8"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout8">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputCedulaNuevaPersona"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Cédula:"
+                        android:text="@={persona.cedula}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/text_TipoPersonaNuevaPersona"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Tipo Persona:"
+                    android:textSize="17sp"
+                    app:layout_constraintStart_toStartOf="@+id/textInputLayout9"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout9" />
+                <TextView
+                    android:id="@+id/textViewSpinnerTipoPersonaNuevaPersona"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/spinnerTipoPersonaNuevaPersona"
+                    app:layout_constraintEnd_toEndOf="@+id/spinnerTipoPersonaNuevaPersona"
+                    app:layout_constraintStart_toStartOf="@+id/spinnerTipoPersonaNuevaPersona"
+                    app:layout_constraintTop_toTopOf="@+id/spinnerTipoPersonaNuevaPersona" />
+
+                <Spinner
+                    android:id="@+id/spinnerTipoPersonaNuevaPersona"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toEndOf="@+id/text_TipoPersonaNuevaPersona"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/text_TipoPersonaNuevaPersona"
+                    app:layout_constraintTop_toBottomOf="@+id/text_TipoPersonaNuevaPersona" />
+
+                <TextView
+                    android:id="@+id/textViewfechaNacimientoNuevaPersona"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Fecha de Nacimiento:"
+                    android:textSize="17sp"
+                    app:layout_constraintEnd_toEndOf="@+id/spinnerTipoPersonaNuevaPersona"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/spinnerTipoPersonaNuevaPersona"
+                    app:layout_constraintTop_toBottomOf="@+id/spinnerTipoPersonaNuevaPersona" />
+
+                <EditText
+                    android:id="@+id/inputfechaNacimientoNuevaPersona"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:ems="10"
+                    android:hint="yyyy/MM/dd"
+                    android:inputType="date"
+                    app:layout_constraintEnd_toEndOf="@+id/textViewfechaNacimientoNuevaPersona"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/textViewfechaNacimientoNuevaPersona"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewfechaNacimientoNuevaPersona" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnGuardarNuevaPersona"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:text="Guardar"
+                        app:layout_constraintStart_toStartOf="@+id/inputfechaNacimientoNuevaPersona"
+                        app:layout_constraintTop_toBottomOf="@+id/inputfechaNacimientoNuevaPersona" />
+
+                    <Button
+                        android:id="@+id/btnCancelarNuevaPersona"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:text="Cancelar"
+                        app:layout_constraintStart_toEndOf="@+id/btnGuardarNuevaPersona"
+                        app:layout_constraintTop_toTopOf="@+id/btnGuardarNuevaPersona" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

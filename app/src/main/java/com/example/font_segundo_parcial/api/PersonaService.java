@@ -38,7 +38,7 @@ public interface PersonaService {
             "Accept: application/json"
     })
     @PUT("persona")
-    Call<Persona> putPersona(@Body Persona persona);
+    Call<Void> putPersona(@Body Persona persona);
 
     @Headers({
             "Accept: application/json"
