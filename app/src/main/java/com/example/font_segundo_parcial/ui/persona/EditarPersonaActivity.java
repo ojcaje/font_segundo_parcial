@@ -32,6 +32,8 @@ public class EditarPersonaActivity extends AppCompatActivity {
 
     com.example.font_segundo_parcial.api.Persona persona;
 
+    Persona p;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +76,7 @@ public class EditarPersonaActivity extends AppCompatActivity {
             public void onResponse(Call<Persona> call, Response<Persona> response) {
                 persona = response.body();
 
+                p = persona;
                 // cargar los datos de la PERSONA en los campos correspondientes
                 binding.setPersona(persona);
 
@@ -144,6 +147,44 @@ public class EditarPersonaActivity extends AppCompatActivity {
                     }
                 }
         );
+
+
+        //eliminar persona
+        fragmento.findViewById(R.id.btnChau).setVisibility(fragmento.VISIBLE);
+        fragmento.findViewById(R.id.btnChau).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(p!=null){
+                    int idPersona = p.getIdPersona();
+                    Log.i("ELIMINAR", "Se procede a eliminar la persona");
+                    //eliminar(idPersona);
+
+                    Call<Void> callApi= RetrofitUtil.getPersonaService()
+                            .deletePersona(idPersona);
+                    callApi.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            if(response.isSuccessful()){
+                                Toast.makeText(estaActividad, "Éxito al eliminar", Toast.LENGTH_LONG).show();
+                                estaActividad.finish();
+                            }
+                            else {
+                                Log.e("s", "Error al hacer delete");
+                                Toast.makeText(estaActividad, "Error al eliminar, registro en uso", Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            Log.e("PERSONA: ", t.toString());
+                        }
+                    });
+
+
+                }
+            }
+        });
+
     }
 
     // this event will enable the back

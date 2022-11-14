@@ -44,6 +44,6 @@ public interface PersonaService {
             "Accept: application/json"
     })
     @DELETE("persona/{idPersona}")
-    Call<Persona> deletePersona(@Path("idPersona") Integer idPersona);
+    Call<Void> deletePersona(@Path("idPersona") Integer idPersona);
 
 }
