@@ -40,16 +40,6 @@ public class Persona implements Serializable {
     @Expose
     private String fechaNacimiento;
 
-    /*private boolean isSelected = false;
-
-    public boolean isSelected() {
-        return isSelected;
-    }
-
-    public void setSelected(boolean selected) {
-        isSelected = selected;
-    }*/
-
     public Integer getIdPersona() {
         return idPersona;
     }

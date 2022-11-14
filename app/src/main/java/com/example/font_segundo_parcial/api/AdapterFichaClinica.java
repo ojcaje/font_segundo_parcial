@@ -45,7 +45,7 @@ public class AdapterFichaClinica extends RecyclerView.Adapter<AdapterFichaClinic
         viewHolder.tvSubcategoria.setText(dsFichas[position].getIdTipoProducto().getDescripcion());
         viewHolder.tvFecha.setText(dsFichas[position].getFechaHoraCadenaFormateada());
 
-        // para lanzar la actividad de editar la ficha clínica actual
+        // para lanzar la actividad de editar la persona actual
         Integer idFicha = dsFichas[position].getIdFichaClinica();
         viewHolder.btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
