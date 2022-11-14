@@ -108,16 +108,16 @@ public class EditarPersonaActivity extends AppCompatActivity {
                         personaActualizada.setTipoPersona(persona.getTipoPersona());
                         personaActualizada.setEmail(persona.getEmail());
                         try {
-                            // convertir string a fecha
-                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-                            Date datofecha = sdf.parse(persona.getFechaNacimiento());
 
-                            SimpleDateFormat sdfTIME = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-                            // convertir fecha a string
-                            String fecha = sdf.format(datofecha);
-                            personaActualizada.setFechaNacimiento(fecha);
+                            String fecha_ = persona.getFechaNacimiento();
+                            if (fecha_!= null){
+                                personaActualizada.setFechaNacimiento(fecha_.concat(" 00:00:00"));
+                            }else{
+                                Toast.makeText(estaActividad, "Fecha no valida", Toast.LENGTH_LONG).show();
+                            }
 
-                        } catch (ParseException e) {
+
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 

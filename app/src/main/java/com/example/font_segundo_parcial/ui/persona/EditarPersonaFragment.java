@@ -93,6 +93,7 @@ public class EditarPersonaFragment extends Fragment {
 
         //datepicker
         fechaNacimiento = vista.findViewById(R.id.inputfechaNacimientoNuevaPersona);
+        fechaNacimiento.setFocusable(false);
         fechaNacimiento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -197,7 +198,7 @@ public class EditarPersonaFragment extends Fragment {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, month, dayOfMonth);
 
-                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 String strFecha = format.format(newDate.getTime());
 
                 fechaTxt.setText(strFecha);
